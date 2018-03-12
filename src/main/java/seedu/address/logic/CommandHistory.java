@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Stores the history of commands executed.
+ * Stores the history of COMMANDS executed.
  */
 public class CommandHistory {
     private LinkedList<String> userInputHistory;

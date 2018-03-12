@@ -12,12 +12,16 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.SetThemeRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -28,7 +32,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private static final int THEME_INDEX_TEAL = 0;
+    private static final int THEME_INDEX_DARK = 1;
+
     private final Logger logger = LogsCenter.getLogger(this.getClass());
+    private final String[] themes = {"Teal", "Dark"};
 
     private Stage primaryStage;
     private Logic logic;
@@ -193,5 +201,41 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    //@author owzhenwei
+    /**
+     * Sets the the theme based on user's preference
+     */
+    private void setTheme(int selectedIndex) throws CommandException {
+        String themeName = "";
+
+        switch (selectedIndex) {
+        case 1:
+            themeName = themes[THEME_INDEX_TEAL];
+            break;
+        case 2:
+            themeName = themes[THEME_INDEX_DARK];
+            break;
+        default:
+            break;
+        }
+
+        if (MainApp.class.getResource(FXML_FILE_FOLDER + themeName + "Theme.css") == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_FILE_PATH);
+        }
+
+        getRoot().getScene().getStylesheets().clear();
+        getRoot().getScene().getStylesheets().add(FXML_FILE_FOLDER + themeName + "Theme.css");
+        getRoot().getScene().getStylesheets().add(FXML_FILE_FOLDER + "Extensions" + themeName + ".css");
+        prefs.setExtensionName("Extensions" + themeName);
+        prefs.setThemeName(themeName + "Theme");
+
+    }
+
+    @Subscribe
+    private void handleSetThemeRequestEvent(SetThemeRequestEvent event) throws CommandException {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        setTheme(event.getSelectedIndex());
     }
 }

@@ -52,7 +52,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertBehaviorForFailedCommand();
         assertBehaviorForSuccessfulCommand();
 
-        // verify that style is changed correctly even after multiple consecutive failed commands
+        // verify that style is changed correctly even after multiple consecutive failed COMMANDS
         assertBehaviorForSuccessfulCommand();
         assertBehaviorForFailedCommand();
         assertBehaviorForFailedCommand();
@@ -80,7 +80,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.UP, COMMAND_THAT_SUCCEEDS);
         assertInputHistory(KeyCode.DOWN, "");
 
-        // two commands (latest command is failure)
+        // two COMMANDS (latest command is failure)
         commandBoxHandle.run(COMMAND_THAT_FAILS);
         assertInputHistory(KeyCode.UP, COMMAND_THAT_SUCCEEDS);
         assertInputHistory(KeyCode.UP, COMMAND_THAT_SUCCEEDS);
@@ -89,7 +89,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.DOWN, "");
         assertInputHistory(KeyCode.UP, COMMAND_THAT_FAILS);
 
-        // insert command in the middle of retrieving previous commands
+        // insert command in the middle of retrieving previous COMMANDS
         guiRobot.push(KeyCode.UP);
         String thirdCommand = "list";
         commandBoxHandle.run(thirdCommand);
@@ -112,12 +112,12 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.DOWN, "");
         assertInputHistory(KeyCode.UP, COMMAND_THAT_SUCCEEDS);
 
-        // two commands
+        // two COMMANDS
         commandBoxHandle.run(COMMAND_THAT_FAILS);
         assertInputHistory(KeyCode.DOWN, "");
         assertInputHistory(KeyCode.UP, COMMAND_THAT_FAILS);
 
-        // insert command in the middle of retrieving previous commands
+        // insert command in the middle of retrieving previous COMMANDS
         guiRobot.push(KeyCode.UP);
         String thirdCommand = "list";
         commandBoxHandle.run(thirdCommand);

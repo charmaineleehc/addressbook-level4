@@ -14,8 +14,9 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
     /**
-     * Stores a list of commands by their command word
+     * Stores a list of COMMANDS by their command word
      */
+
     public static final String[] commands = {
         AddEmployeeCommand.COMMAND_WORD,
         ClearCommand.COMMAND_WORD,
@@ -29,7 +30,8 @@ public abstract class Command {
         RedoCommand.COMMAND_WORD,
         SelectCommand.COMMAND_WORD,
         SetCommand.COMMAND_WORD,
-        UndoCommand.COMMAND_WORD
+        UndoCommand.COMMAND_WORD,
+        ThemeCommand.COMMAND_WORD
     };
 
     protected Model model;

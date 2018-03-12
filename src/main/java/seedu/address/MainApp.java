@@ -187,6 +187,16 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         ui.start(primaryStage);
+        setTheme(primaryStage);
+    }
+
+    /**
+     * Sets the theme of the main app based on user preference
+     */
+    private void setTheme(Stage primaryStage) {
+        primaryStage.getScene().getStylesheets().clear();
+        primaryStage.getScene().getStylesheets().add("/view/" + userPrefs.getThemeName() + ".css");
+        primaryStage.getScene().getStylesheets().add("/view/" + userPrefs.getExtensionName() + ".css");
     }
 
     @Override

@@ -109,7 +109,7 @@ public class UndoRedoStackTest {
         undoRedoStack = prepareStack(Arrays.asList(dummyUndoableCommandOne, dummyUndoableCommandTwo),
                 Collections.emptyList());
 
-        // multiple commands in undoStack
+        // multiple COMMANDS in undoStack
         assertPopUndoSuccess(dummyUndoableCommandTwo, Collections.singletonList(dummyUndoableCommandOne),
                 Collections.singletonList(dummyUndoableCommandTwo));
 
@@ -127,7 +127,7 @@ public class UndoRedoStackTest {
         undoRedoStack = prepareStack(Collections.emptyList(),
                 Arrays.asList(dummyUndoableCommandOne, dummyUndoableCommandTwo));
 
-        // multiple commands in redoStack
+        // multiple COMMANDS in redoStack
         assertPopRedoSuccess(dummyUndoableCommandTwo, Collections.singletonList(dummyUndoableCommandTwo),
                 Collections.singletonList(dummyUndoableCommandOne));
 

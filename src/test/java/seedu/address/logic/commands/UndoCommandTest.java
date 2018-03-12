@@ -42,7 +42,7 @@ public class UndoCommandTest {
         deleteEmployeeCommandOne.execute();
         deleteEmployeeCommandTwo.execute();
 
-        // multiple commands in undoStack
+        // multiple COMMANDS in undoStack
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         deleteFirstPerson(expectedModel);
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);

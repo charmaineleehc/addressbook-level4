@@ -8,8 +8,8 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoableCommand;
 
 /**
- * Maintains the undo-stack (the stack of commands that can be undone) and the redo-stack (the stack of
- * commands that can be undone).
+ * Maintains the undo-stack (the stack of COMMANDS that can be undone) and the redo-stack (the stack of
+ * COMMANDS that can be undone).
  */
 public class UndoRedoStack {
     private Stack<UndoableCommand> undoStack;
@@ -55,14 +55,14 @@ public class UndoRedoStack {
     }
 
     /**
-     * Returns true if there are more commands that can be undone.
+     * Returns true if there are more COMMANDS that can be undone.
      */
     public boolean canUndo() {
         return !undoStack.empty();
     }
 
     /**
-     * Returns true if there are more commands that can be redone.
+     * Returns true if there are more COMMANDS that can be redone.
      */
     public boolean canRedo() {
         return !redoStack.empty();

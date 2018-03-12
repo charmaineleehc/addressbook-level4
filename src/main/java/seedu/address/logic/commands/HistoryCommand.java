@@ -10,13 +10,13 @@ import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 
 /**
- * Lists all the commands entered by user from the start of app launch.
+ * Lists all the COMMANDS entered by user from the start of app launch.
  */
 public class HistoryCommand extends Command {
 
     public static final String COMMAND_WORD = "history";
-    public static final String MESSAGE_SUCCESS = "Entered commands (from most recent to earliest):\n%1$s";
-    public static final String MESSAGE_NO_HISTORY = "You have not yet entered any commands.";
+    public static final String MESSAGE_SUCCESS = "Entered COMMANDS (from most recent to earliest):\n%1$s";
+    public static final String MESSAGE_NO_HISTORY = "You have not yet entered any COMMANDS.";
 
     @Override
     public CommandResult execute() {
