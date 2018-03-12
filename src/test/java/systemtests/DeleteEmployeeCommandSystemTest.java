@@ -32,7 +32,8 @@ public class DeleteEmployeeCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: delete the first employee in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteEmployeeCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
+        String command = "     " + DeleteEmployeeCommand.COMMAND_WORD
+                + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
         Employee deletedEmployee = removePerson(expectedModel, INDEX_FIRST_PERSON);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedEmployee);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -73,7 +74,7 @@ public class DeleteEmployeeCommandSystemTest extends AddressBookSystemTest {
         command = DeleteEmployeeCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a employee card is selected ------------------------ */
+        /* --------------------- Performing delete operation while a employee card is selected --------------------- */
 
         /* Case: delete the selected employee -> employee list panel selects the employee before the deleted employee */
         showAllPersons();
@@ -103,10 +104,12 @@ public class DeleteEmployeeCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
-        assertCommandFailure(DeleteEmployeeCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
+        assertCommandFailure(
+                DeleteEmployeeCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: invalid arguments (extra argument) -> rejected */
-        assertCommandFailure(DeleteEmployeeCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
+        assertCommandFailure(
+                DeleteEmployeeCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND);
@@ -127,8 +130,8 @@ public class DeleteEmployeeCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Deletes the employee at {@code toDelete} by creating a default {@code DeleteEmployeeCommand} using {@code toDelete} and
-     * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
+     * Deletes the employee at {@code toDelete} by creating a default {@code DeleteEmployeeCommand} using
+     * {@code toDelete} and performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
      * @see DeleteEmployeeCommandSystemTest#assertCommandSuccess(String, Model, String)
      */
     private void assertCommandSuccess(Index toDelete) {
@@ -137,7 +140,8 @@ public class DeleteEmployeeCommandSystemTest extends AddressBookSystemTest {
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedEmployee);
 
         assertCommandSuccess(
-                DeleteEmployeeCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);
+                DeleteEmployeeCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel,
+                expectedResultMessage);
     }
 
     /**

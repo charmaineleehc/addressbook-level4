@@ -117,8 +117,7 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
-        public CommandWords getCommandWords()
-        {
+        public CommandWords getCommandWords() {
             fail("This method should never be called");
             return null;
         }

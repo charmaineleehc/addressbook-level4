@@ -21,8 +21,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.employee.NameContainsKeywordsPredicate;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindEmployeeCommand}.
@@ -87,7 +87,8 @@ public class FindEmployeeCommandTest {
      *     - the {@code FilteredList<Employee>} is equal to {@code expectedList}<br>
      *     - the {@code AddressBook} in model remains the same after executing the {@code command}
      */
-    private void assertCommandSuccess(FindEmployeeCommand command, String expectedMessage, List<Employee> expectedList) {
+    private void assertCommandSuccess(
+            FindEmployeeCommand command, String expectedMessage, List<Employee> expectedList) {
         AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
         CommandResult commandResult = command.execute();
 

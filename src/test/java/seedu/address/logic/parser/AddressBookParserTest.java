@@ -15,9 +15,20 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.AddEmployeeCommand;
+import seedu.address.logic.commands.AddEmployeeCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteEmployeeCommand;
+import seedu.address.logic.commands.EditEmployeeCommand;
 import seedu.address.logic.commands.EditEmployeeCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindEmployeeCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListEmployeeCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.NameContainsKeywordsPredicate;
@@ -55,8 +66,9 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Employee employee = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(employee).build();
-        EditEmployeeCommand command = (EditEmployeeCommand) parser.parseCommand(EditEmployeeCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getPersonDetails(employee));
+        EditEmployeeCommand command = (EditEmployeeCommand) parser.parseCommand(
+                EditEmployeeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PersonUtil.getPersonDetails(employee));
         assertEquals(new EditEmployeeCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -70,7 +82,8 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindEmployeeCommand command = (FindEmployeeCommand) parser.parseCommand(
-                FindEmployeeCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindEmployeeCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindEmployeeCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -96,7 +109,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListEmployeeCommand.COMMAND_WORD) instanceof ListEmployeeCommand);
-        assertTrue(parser.parseCommand(ListEmployeeCommand.COMMAND_WORD + " 3") instanceof ListEmployeeCommand);
+        assertTrue(parser.parseCommand(
+                ListEmployeeCommand.COMMAND_WORD + " 3") instanceof ListEmployeeCommand);
     }
 
     @Test
