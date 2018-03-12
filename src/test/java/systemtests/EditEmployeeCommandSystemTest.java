@@ -118,8 +118,8 @@ public class EditEmployeeCommandSystemTest extends AddressBookSystemTest {
 
         /* --------------------- Performing edit operation while a employee card is selected ----------------------- */
 
-        /* Case: selects first card in the employee list, edit a employee -> edited, card selection remains unchanged but
-         * browser url changes
+        /* Case: selects first card in the employee list, edit a employee -> edited, card selection remains unchanged
+         * but browser url changes
          */
         showAllPersons();
         index = INDEX_FIRST_PERSON;
