@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Employee;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.exceptions.DuplicatePersonException;
 
 /**
  * Adds a employee to the address book.

@@ -11,10 +11,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Employee;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.UniquePersonList;
+import seedu.address.model.employee.exceptions.DuplicatePersonException;
+import seedu.address.model.employee.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -94,11 +94,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given employee {@code target} in the list with {@code editedPerson}.
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedPerson}.
      *
      * @throws DuplicatePersonException if updating the employee's details causes the employee to be equivalent to
-     *      another existing person in the list.
+     *      another existing employee in the list.
      * @throws PersonNotFoundException if {@code target} could not be found in the list.
      *
      * @see #syncWithMasterTagList(Employee)
@@ -116,8 +116,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      *  Updates the master tag list to include tags in {@code employee} that are not in the list.
-     *  @return a copy of this {@code employee} such that every tag in this employee points to a Tag object in the master
-     *  list.
+     *  @return a copy of this {@code employee} such that every tag in this employee points to a Tag object in the
+     *  master list.
      */
     private Employee syncWithMasterTagList(Employee employee) {
         final UniqueTagList personTags = new UniqueTagList(employee.getTags());
@@ -132,7 +132,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Employee(
-                employee.getName(), employee.getPhone(), employee.getEmail(), employee.getAddress(), correctTagReferences);
+                employee.getName(), employee.getPhone(), employee.getEmail(),
+                employee.getAddress(), correctTagReferences);
     }
 
     /**

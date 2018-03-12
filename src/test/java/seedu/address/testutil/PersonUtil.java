@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.AddEmployeeCommand;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 
 /**
  * A utility class for Employee.

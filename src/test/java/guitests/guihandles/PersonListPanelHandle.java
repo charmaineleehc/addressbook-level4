@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.scene.control.ListView;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 import seedu.address.ui.PersonCard;
 
 /**

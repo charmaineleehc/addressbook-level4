@@ -34,8 +34,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddEmployeeCommand;
-import seedu.address.model.person.*;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.*;
+import seedu.address.model.employee.Employee;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 

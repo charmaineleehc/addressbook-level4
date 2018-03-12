@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditEmployeeCommand.EditPersonDescriptor;
-import seedu.address.model.person.*;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.*;
+import seedu.address.model.employee.Employee;
 import seedu.address.model.tag.Tag;
 
 /**

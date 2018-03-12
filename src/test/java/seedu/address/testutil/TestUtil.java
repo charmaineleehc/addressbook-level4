@@ -6,7 +6,7 @@ import java.io.IOException;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.Model;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 
 /**
  * A utility class for test cases.

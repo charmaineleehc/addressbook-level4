@@ -8,7 +8,7 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 import seedu.address.testutil.PersonBuilder;
 
 public class EmployeeCardTest extends GuiUnitTest {

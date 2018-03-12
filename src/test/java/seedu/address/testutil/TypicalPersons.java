@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Employee;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.exceptions.DuplicatePersonException;
 
 /**
  * A utility class containing a list of {@code Employee} objects to be used in tests.
