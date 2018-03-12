@@ -91,7 +91,7 @@ public class SelectCommandTest {
         // null -> returns false
         assertFalse(selectFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(selectFirstCommand.equals(selectSecondCommand));
     }
 

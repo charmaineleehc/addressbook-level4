@@ -10,11 +10,11 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Employee in the address book.
  *
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Employee {
 
     private final Name name;
     private final Phone phone;
@@ -26,7 +26,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Employee(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -66,15 +66,15 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Employee)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(this.getName())
-                && otherPerson.getPhone().equals(this.getPhone())
-                && otherPerson.getEmail().equals(this.getEmail())
-                && otherPerson.getAddress().equals(this.getAddress());
+        Employee otherEmployee = (Employee) other;
+        return otherEmployee.getName().equals(this.getName())
+                && otherEmployee.getPhone().equals(this.getPhone())
+                && otherEmployee.getEmail().equals(this.getEmail())
+                && otherEmployee.getAddress().equals(this.getAddress());
     }
 
     @Override

@@ -16,7 +16,7 @@ public class JobList implements Iterable<Job> {
     private final ObservableList<Job> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument
+     * Returns true if the list contains an equivalent employee as the given argument
      */
     public boolean contains(Job toCheck) {
         requireNonNull(toCheck);

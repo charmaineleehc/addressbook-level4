@@ -21,12 +21,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Employee;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AddEmployeeCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -34,7 +34,7 @@ public class AddCommandTest {
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new AddEmployeeCommand(null);
     }
 
     @Test
@@ -45,12 +45,12 @@ public class AddCommandTest {
                 return new CommandWords();
             }
         };
-        Person validPerson = new PersonBuilder().build();
+        Employee validEmployee = new PersonBuilder().build();
 
-        CommandResult commandResult = getAddCommandForPerson(validPerson, modelStub).execute();
+        CommandResult commandResult = getAddCommandForPerson(validEmployee, modelStub).execute();
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddEmployeeCommand.MESSAGE_SUCCESS, validEmployee), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validEmployee), modelStub.personsAdded);
     }
 
     @Test
@@ -61,26 +61,26 @@ public class AddCommandTest {
                 return new CommandWords();
             }
         };
-        Person validPerson = new PersonBuilder().build();
+        Employee validEmployee = new PersonBuilder().build();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddEmployeeCommand.MESSAGE_DUPLICATE_PERSON);
 
-        getAddCommandForPerson(validPerson, modelStub).execute();
+        getAddCommandForPerson(validEmployee, modelStub).execute();
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Employee alice = new PersonBuilder().withName("Alice").build();
+        Employee bob = new PersonBuilder().withName("Bob").build();
+        AddEmployeeCommand addAliceCommand = new AddEmployeeCommand(alice);
+        AddEmployeeCommand addBobCommand = new AddEmployeeCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddEmployeeCommand addAliceCommandCopy = new AddEmployeeCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -89,15 +89,15 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
     /**
-     * Generates a new AddCommand with the details of the given person.
+     * Generates a new AddEmployeeCommand with the details of the given employee.
      */
-    private AddCommand getAddCommandForPerson(Person person, Model model) {
-        AddCommand command = new AddCommand(person);
+    private AddEmployeeCommand getAddCommandForPerson(Employee employee, Model model) {
+        AddEmployeeCommand command = new AddEmployeeCommand(employee);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }
@@ -107,7 +107,7 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Person person) throws DuplicatePersonException {
+        public void addPerson(Employee employee) throws DuplicatePersonException {
             fail("This method should not be called.");
         }
 
@@ -135,34 +135,34 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deletePerson(Person target) throws PersonNotFoundException {
+        public void deletePerson(Employee target) throws PersonNotFoundException {
             fail("This method should not be called.");
         }
 
         @Override
-        public void updatePerson(Person target, Person editedPerson)
+        public void updatePerson(Employee target, Employee editedEmployee)
                 throws DuplicatePersonException {
             fail("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Employee> getFilteredPersonList() {
             fail("This method should not be called.");
             return null;
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPersonList(Predicate<Employee> predicate) {
             fail("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that always throw a DuplicatePersonException when trying to add a person.
+     * A Model stub that always throw a DuplicatePersonException when trying to add a employee.
      */
     private class ModelStubThrowingDuplicatePersonException extends ModelStub {
         @Override
-        public void addPerson(Person person) throws DuplicatePersonException {
+        public void addPerson(Employee employee) throws DuplicatePersonException {
             throw new DuplicatePersonException();
         }
 
@@ -173,15 +173,15 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the employee being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Employee> personsAdded = new ArrayList<>();
 
         @Override
-        public void addPerson(Person person) throws DuplicatePersonException {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addPerson(Employee employee) throws DuplicatePersonException {
+            requireNonNull(employee);
+            personsAdded.add(employee);
         }
 
         @Override

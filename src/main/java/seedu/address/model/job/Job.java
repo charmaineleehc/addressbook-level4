@@ -4,18 +4,18 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Employee;
 
 //@author owzhenwei
 /**
  * Represents a Job in the car servicing manager
  */
 public class Job {
-    private final Person customer;
+    private final Employee customer;
     private final VehicleNumber vehicleNumber;
     private final JobNumber jobNumber;
 
-    public Job(Person customer, VehicleNumber vehicleNumber, JobNumber jobNumber) {
+    public Job(Employee customer, VehicleNumber vehicleNumber, JobNumber jobNumber) {
         requireAllNonNull(customer, vehicleNumber);
         this.customer = customer;
         this.vehicleNumber = vehicleNumber;
@@ -30,7 +30,7 @@ public class Job {
         return vehicleNumber;
     }
 
-    public Person getCustomer() {
+    public Employee getCustomer() {
         return customer;
     }
 

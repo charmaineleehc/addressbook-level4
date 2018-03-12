@@ -17,15 +17,15 @@ public abstract class Command {
      * Stores a list of commands by their command word
      */
     public static final String[] commands = {
-        AddCommand.COMMAND_WORD,
+        AddEmployeeCommand.COMMAND_WORD,
         ClearCommand.COMMAND_WORD,
-        DeleteCommand.COMMAND_WORD,
-        EditCommand.COMMAND_WORD,
+        DeleteEmployeeCommand.COMMAND_WORD,
+        EditEmployeeCommand.COMMAND_WORD,
         ExitCommand.COMMAND_WORD,
-        FindCommand.COMMAND_WORD,
+        FindEmployeeCommand.COMMAND_WORD,
         HelpCommand.COMMAND_WORD,
         HistoryCommand.COMMAND_WORD,
-        ListCommand.COMMAND_WORD,
+        ListEmployeeCommand.COMMAND_WORD,
         RedoCommand.COMMAND_WORD,
         SelectCommand.COMMAND_WORD,
         SetCommand.COMMAND_WORD,
