@@ -15,7 +15,7 @@ public class SetCommand extends UndoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets a command word to user preference. "
             + "Parameters: CURRENT_COMMAND_WORD NEW_COMMAND_WORD"
-            + "Example: " + "%s" + " "
+            + "Example: " + "set" + " "
             + "OLD_COMMAND" + "NEW_COMMAND";
 
     public static final String MESSAGE_SUCCESS = "%s has been replaced with %s!";
@@ -31,6 +31,18 @@ public class SetCommand extends UndoableCommand {
         this.newWord = newWord;
     }
 
+    public String getMessageSuccess() {
+        return String.format(MESSAGE_SUCCESS, currentWord, newWord);
+    }
+
+    public String getMessageUsed() {
+        return CommandWords.getMessageUsed(newWord);
+    }
+
+    public String getMessageUnused() {
+        return CommandWords.getMessageUnused(currentWord);
+    }
+
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
@@ -39,7 +51,7 @@ public class SetCommand extends UndoableCommand {
         } catch (CommandWordException e) {
             throw new CommandException(e.getMessage());
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, currentWord, newWord));
+        return new CommandResult(getMessageSuccess());
     }
 
     @Override

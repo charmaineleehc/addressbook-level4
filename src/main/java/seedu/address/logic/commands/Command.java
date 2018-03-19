@@ -1,39 +1,15 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.exceptions.CommandWordException;
 import seedu.address.model.Model;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
-    /**
-     * Stores a list of COMMANDS by their command word
-     */
-    public static final String[] COMMANDS = {
-        AddCommand.COMMAND_WORD,
-        ClearCommand.COMMAND_WORD,
-        DeleteCommand.COMMAND_WORD,
-        EditCommand.COMMAND_WORD,
-        ExitCommand.COMMAND_WORD,
-        FindCommand.COMMAND_WORD,
-        HelpCommand.COMMAND_WORD,
-        HistoryCommand.COMMAND_WORD,
-        ListCommand.COMMAND_WORD,
-        RedoCommand.COMMAND_WORD,
-        SelectCommand.COMMAND_WORD,
-        SetCommand.COMMAND_WORD,
-        UndoCommand.COMMAND_WORD,
-        ThemeCommand.COMMAND_WORD,
-        SortCommand.COMMAND_WORD
-    };
-
     protected Model model;
     protected CommandHistory history;
     protected UndoRedoStack undoRedoStack;
@@ -46,16 +22,6 @@ public abstract class Command {
      */
     public static String getMessageForPersonListShownSummary(int displaySize) {
         return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, displaySize);
-    }
-
-    /**
-     * @param key used to reference Command Word
-     * @return  Command word used
-     * @throws CommandWordException command word is not valid
-     */
-    public String getCommandWord(String key) throws CommandWordException {
-        requireNonNull(model);
-        return model.getCommandWords().getCommandWord(key);
     }
 
     /**
