@@ -367,6 +367,48 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two * different things.
 // end::undoredo[]
 
+// tag::sendemailtoemployee[]
+=== Send Email to Employees about Job
+
+==== Current Implementation
+
+This feature is implemented using Gmail API.
+
+Suppose that the user typed the first email command.
+
+`GoogleAuthorizationCodeFlow` is used to build the authorization code flow and trigger user authorization request. It then manages and persists user `Credential`.
+
+`Credential` are then saved into a `File` so that the user need not repeatedly key in his or her authorization information before sending each email.
+
+To send an email, firstly, an empty `Properties` list is created, which is used to create an email `Session`. Next, a `MimeMessage`, a class in the `javax.mail.internet` package is created using that `Session`. Attributes `from`, `Recipient`, `Subject` and `Text` of the `MimeMessage` are then set. The `Text` set contains information extracted from the particular `Job`.
+
+Next, `MimeMessage` is encoded using base64url. A `Message` object is instantiated, and the value of the `raw` property of the `Message` is set to the encoded `MimeMessage`.
+
+Lastly, make a call to `messages.send` to send the email.
+
+==== Design Considerations
+
+===== Aspect: Email content
+
+* **Alternative 1 (current choice):** Email content contains job information extracted from the particular Job object only
+** Pros: Easier to implement, and the email will be sent out very quickly, immediately after typing one line of command, making it more convenient for the user.
+** Cons: User has no ability to change or add to the contents of the email if the user wishes to.
+* **Alternative 2:** User gets to edit or add to the email content
+** Pros: Provides flexibility as the user is allowed to change and add details to the email content.
+** Cons: Need to direct user to an editor, thus more difficult to implement. User would also have to go through more steps than necessary if the user does not wish to change or add details to the email content.
+
+
+===== Aspect: Authorization information
+
+* **Alternative 1 (current choice):** Stored in file system so subsequent executions will not prompt for authorization
+** Pros: More convenient for user as the user only needs to key in his or her authorization information once
+** Cons: Unsafe
+* **Alternative 2:** Prompt for authorization for every subsequent executions
+** Pros: Safe
+** Cons: Inconvenient for user as user needs to always key in authorization information before sending each email
+
+// end::sendemailtoemployee[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
