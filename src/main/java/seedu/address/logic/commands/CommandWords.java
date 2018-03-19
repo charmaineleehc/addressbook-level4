@@ -14,38 +14,15 @@ import seedu.address.logic.commands.exceptions.CommandWordException;
  * A serializable data structure used to contain the mappings of a command to a word
  */
 public class CommandWords implements Serializable {
-    public static final String MESSAGE_UNUSED = "%s is not an active command.";
-    public static final String MESSAGE_USED = "%s is already used.";
-    public static final String MESSAGE_NO_CHANGE = "Old and new command word is the same.";
-    public static final String MESSAGE_OVERWRITE_DEFAULT = "%s is a default command.";
-    /**
-     * Stores a list of COMMANDS by their command word
-     */
-    public static final String[] COMMANDS = {
-        AddEmployeeCommand.COMMAND_WORD,
-        ClearCommand.COMMAND_WORD,
-        DeleteEmployeeCommand.COMMAND_WORD,
-        EditEmployeeCommand.COMMAND_WORD,
-        ExitCommand.COMMAND_WORD,
-        FindEmployeeCommand.COMMAND_WORD,
-        HelpCommand.COMMAND_WORD,
-        HistoryCommand.COMMAND_WORD,
-        ListEmployeeCommand.COMMAND_WORD,
-        RedoCommand.COMMAND_WORD,
-        SelectCommand.COMMAND_WORD,
-        SetCommand.COMMAND_WORD,
-        UndoCommand.COMMAND_WORD,
-        ThemeCommand.COMMAND_WORD,
-        SortEmployeeCommand.COMMAND_WORD
-    };
-
+    public static final String MESSAGE_INACTIVE = "%s is not an active command.";
+    public static final String MESSAGE_DUPLICATE = "%s is already used.";
     public final HashMap<String, String> commands;
     /**
      * Creates a data structure to maintain used command words.
      */
     public CommandWords() {
         commands = new HashMap<>();
-        for (String command : COMMANDS) {
+        for (String command : Command.COMMANDS) {
             commands.put(command, command);
         }
     }
@@ -57,31 +34,23 @@ public class CommandWords implements Serializable {
     }
 
     /**
-     * Returns whether (@code commandWord) is in (@code COMMANDS)
+     * Moves (@code command from (@code COMMANDS) to (@code verifiedCommands). Creates a new entry if missing.
      */
-    public static boolean isDefaultCommandWord(String commandWord) {
-        for (String command: COMMANDS) {
-            if (command.equals(commandWord)) {
-                return true;
-            }
+    private void moveVerifiedWord(String command, HashMap<String, String> verifiedCommands) {
+        verifiedCommands.put(command, commands.getOrDefault(command, command));
+    }
+
+    /**
+     * Checks if hashmap contains invalid command keys and adds any missing
+     * command keys
+     */
+    public void checkIntegrity() {
+        HashMap<String, String> verifiedCommands = new HashMap<>();
+        for (String command : Command.COMMANDS) {
+            moveVerifiedWord(command, verifiedCommands);
         }
-        return false;
-    }
-
-    public static String getMessageUnused(String commandWord) {
-        return String.format(MESSAGE_UNUSED, commandWord);
-    }
-
-    public static String getMessageOverwriteDefault(String commandWord) {
-        return String.format(MESSAGE_OVERWRITE_DEFAULT, commandWord);
-    }
-
-    public static String getMessageUsed(String commandWord) {
-        return String.format(MESSAGE_USED, commandWord);
-    }
-
-    public static String getMessageNoChange() {
-        return MESSAGE_NO_CHANGE;
+        commands.clear();
+        commands.putAll(verifiedCommands);
     }
 
     /**
@@ -93,7 +62,7 @@ public class CommandWords implements Serializable {
     public String getCommandWord(String key) throws CommandWordException {
         String commandWord = commands.get(key);
         if (commandWord == null) {
-            throw new CommandWordException(getMessageUnused(key));
+            throw new CommandWordException(String.format(MESSAGE_INACTIVE, key));
         }
         return commandWord;
     }
@@ -113,7 +82,7 @@ public class CommandWords implements Serializable {
                 return currentCommand.getKey();
             }
         }
-        throw new CommandWordException(getMessageUnused(value));
+        throw new CommandWordException(String.format(MESSAGE_INACTIVE, value));
     }
 
     /**
@@ -125,19 +94,10 @@ public class CommandWords implements Serializable {
     public void setCommandWord(String currentWord, String newWord) throws CommandWordException {
         requireNonNull(currentWord, newWord);
         if (currentWord.equals(newWord)) {
-            throw new CommandWordException(getMessageNoChange());
-        }
-        if (isDefaultCommandWord(newWord)
-                && !commands.get(newWord).equals(currentWord)) {
-            throw new CommandWordException(getMessageOverwriteDefault(newWord));
+            return;
         }
         if (commands.containsValue(newWord)) {
-            throw new CommandWordException(getMessageUsed(newWord));
-        }
-        if (isDefaultCommandWord(currentWord)) {
-            commands.remove(currentWord);
-            commands.put(currentWord, newWord);
-            return;
+            throw new CommandWordException(String.format(MESSAGE_DUPLICATE, newWord));
         }
         Iterator<Map.Entry<String, String>> commandList = commands.entrySet().iterator();
         Map.Entry<String, String> currentCommand;
@@ -149,31 +109,9 @@ public class CommandWords implements Serializable {
                 return;
             }
         }
-        throw new CommandWordException(getMessageUnused(currentWord));
+        StringBuilder builder = new StringBuilder();
+        throw new CommandWordException(String.format(MESSAGE_INACTIVE, currentWord));
     }
-
-    /**
-     * Copies key and value of (@code command) from (@code commands)
-     * to (@code verifiedCommands). Creates a new entry with default
-     * key = value if missing.
-     */
-    private void moveVerifiedWord(String command, HashMap<String, String> verifiedCommands) {
-        verifiedCommands.put(command, commands.getOrDefault(command, command));
-    }
-
-    /**
-     * Checks if hashmap contains invalid command keys and adds any missing
-     * command keys
-     */
-    public void checkIntegrity() {
-        HashMap<String, String> verifiedCommands = new HashMap<>();
-        for (String command : COMMANDS) {
-            moveVerifiedWord(command, verifiedCommands);
-        }
-        commands.clear();
-        commands.putAll(verifiedCommands);
-    }
-
 
     /**
      * Resets the existing data of this {@code CommandWords} with {@code newCommandWords}.
@@ -183,29 +121,6 @@ public class CommandWords implements Serializable {
         commands.clear();
         commands.putAll(newCommandWords.commands);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(obj instanceof CommandWords)) {
-            return false;
-        }
-
-        // state check
-        CommandWords other = (CommandWords) obj;
-        for (String commandKey : commands.keySet()) {
-            if (!commands.get(commandKey).equals(other.commands.get(commandKey))) {
-                return false;
-            }
-        }
-        return commands.size() == other.commands.size();
-    }
-
 
     @Override
     public String toString() {

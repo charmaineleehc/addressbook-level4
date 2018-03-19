@@ -11,8 +11,8 @@ import seedu.address.logic.commands.ThemeCommand;
 
 //@author owzhenwei
 /**
- * Test scope: similar to {@code DeleteEmployeeCommandParserTest}.
- * @see DeleteEmployeeCommandParserTest
+ * Test scope: similar to {@code DeleteCommandParserTest}.
+ * @see DeleteCommandParserTest
  */
 
 public class ThemeCommandParserTest {

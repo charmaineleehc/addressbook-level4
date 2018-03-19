@@ -15,31 +15,31 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListEmployeeCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListEmployeeCommandTest {
+public class ListCommandTest {
 
     private Model model;
     private Model expectedModel;
-    private ListEmployeeCommand listEmployeeCommand;
+    private ListCommand listCommand;
 
     @Before
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        listEmployeeCommand = new ListEmployeeCommand();
-        listEmployeeCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        listCommand = new ListCommand();
+        listCommand.setData(model, new CommandHistory(), new UndoRedoStack());
     }
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(listEmployeeCommand, model, ListEmployeeCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(listEmployeeCommand, model, ListEmployeeCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

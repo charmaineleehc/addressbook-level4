@@ -24,23 +24,23 @@ public class UndoCommandTest {
     private static final UndoRedoStack EMPTY_STACK = new UndoRedoStack();
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final DeleteEmployeeCommand deleteEmployeeCommandOne = new DeleteEmployeeCommand(INDEX_FIRST_PERSON);
-    private final DeleteEmployeeCommand deleteEmployeeCommandTwo = new DeleteEmployeeCommand(INDEX_FIRST_PERSON);
+    private final DeleteCommand deleteCommandOne = new DeleteCommand(INDEX_FIRST_PERSON);
+    private final DeleteCommand deleteCommandTwo = new DeleteCommand(INDEX_FIRST_PERSON);
 
     @Before
     public void setUp() {
-        deleteEmployeeCommandOne.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
-        deleteEmployeeCommandTwo.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
+        deleteCommandOne.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
+        deleteCommandTwo.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
     }
 
     @Test
     public void execute() throws Exception {
         UndoRedoStack undoRedoStack = prepareStack(
-                Arrays.asList(deleteEmployeeCommandOne, deleteEmployeeCommandTwo), Collections.emptyList());
+                Arrays.asList(deleteCommandOne, deleteCommandTwo), Collections.emptyList());
         UndoCommand undoCommand = new UndoCommand();
         undoCommand.setData(model, EMPTY_COMMAND_HISTORY, undoRedoStack);
-        deleteEmployeeCommandOne.execute();
-        deleteEmployeeCommandTwo.execute();
+        deleteCommandOne.execute();
+        deleteCommandTwo.execute();
 
         // multiple COMMANDS in undoStack
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());

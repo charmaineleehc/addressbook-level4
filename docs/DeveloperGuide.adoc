@@ -801,17 +801,6 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Value proposition*: A convenient App for car servicing managers to organize servicing jobs and assign specific employees.
 
-*Feature contribution*:
-
-- Importing job entries from an excel file (major enhancement)
-Done by: yuhongherald
-User can specify the file path to an excel file containing the job entries in columns, and header fields to indicate the
-field contents for each row. User then reviews the changes and generates a feedback document.
-
-- Setting custom command keywords (minor enhancement)
-Done by: yuhongherald
-User can set a custom keyword that is not used on top of the original command word.
-
 [appendix]
 == User Stories
 
@@ -920,6 +909,25 @@ Use case ends.
 [none]
 * 2a. Argument has more than one possible auto-complete.
 +
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Navigate using the keyboard
+
+*MSS*
+
+1.  User presses a key to change selection.
+2.  CarviciM changes selection.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. CarviciM is not focussed.
++
+[none]
+**  1a1. User presses global refocus hotkey.
 Use case resumes at step 1.
 
 [discrete]
@@ -1171,13 +1179,6 @@ Use case ends.
 +
 Use case ends.
 
-[none]
-* 1c. The new command word is a default command word for another command.
-[none]
-** 1c1. CarviciM shows an error message.
-+
-Use case ends.
-
 === Use case: Set theme of application
 
 *MSS*
@@ -1218,7 +1219,7 @@ _{More to be added}_
 .  Should respond to user command within 2 seconds.
 .  Should be usable by a novice who has never used an electronic job management app before.
 .  User interface should be intuitive enough for users who are not IT-savvy.
-.  View should fit the screen of any computer with minimum screen size of 640 by 480 pixels.
+.  View should fit the screen of any computer screen size.
 
 _{More to be added}_
 

@@ -29,25 +29,6 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
-    public static final String MESSAGE_INSUFFICIENT_WORDS = "Command word to be changed and new command word must "
-            + "be provided, separated by a space.";
-    public static final String WHITESPACE = "\\s+";
-
-    /**
-     * Parses {@code multipleWordString} into an {@code String[]} containing command words and returns it.
-     * Leading and trailing whitespaces will be trimmed.
-     * @param multipleWordString
-     * @return
-     * @throws IllegalValueException
-     */
-    public static String[] parseWords(String multipleWordString) throws IllegalValueException {
-        String[] commandWords = multipleWordString.trim().split(WHITESPACE);
-        if (commandWords.length != 2) {
-            throw new IllegalValueException(MESSAGE_INSUFFICIENT_WORDS);
-        }
-        return commandWords;
-
-    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

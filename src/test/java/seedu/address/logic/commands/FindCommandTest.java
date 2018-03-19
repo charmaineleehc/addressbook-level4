@@ -25,9 +25,9 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindEmployeeCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
-public class FindEmployeeCommandTest {
+public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -37,14 +37,14 @@ public class FindEmployeeCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindEmployeeCommand findFirstCommand = new FindEmployeeCommand(firstPredicate);
-        FindEmployeeCommand findSecondCommand = new FindEmployeeCommand(secondPredicate);
+        FindCommand findFirstCommand = new FindCommand(firstPredicate);
+        FindCommand findSecondCommand = new FindCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindEmployeeCommand findFirstCommandCopy = new FindEmployeeCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -60,23 +60,23 @@ public class FindEmployeeCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        FindEmployeeCommand command = prepareCommand(" ");
+        FindCommand command = prepareCommand(" ");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        FindEmployeeCommand command = prepareCommand("Kurz Elle Kunz");
+        FindCommand command = prepareCommand("Kurz Elle Kunz");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, ELLE, FIONA));
     }
 
     /**
-     * Parses {@code userInput} into a {@code FindEmployeeCommand}.
+     * Parses {@code userInput} into a {@code FindCommand}.
      */
-    private FindEmployeeCommand prepareCommand(String userInput) {
-        FindEmployeeCommand command =
-                new FindEmployeeCommand(new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
+    private FindCommand prepareCommand(String userInput) {
+        FindCommand command =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }
@@ -87,7 +87,7 @@ public class FindEmployeeCommandTest {
      *     - the {@code FilteredList<Person>} is equal to {@code expectedList}<br>
      *     - the {@code AddressBook} in model remains the same after executing the {@code command}
      */
-    private void assertCommandSuccess(FindEmployeeCommand command, String expectedMessage, List<Person> expectedList) {
+    private void assertCommandSuccess(FindCommand command, String expectedMessage, List<Person> expectedList) {
         AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
         CommandResult commandResult = command.execute();
 

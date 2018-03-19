@@ -26,7 +26,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddEmployeeCommandTest {
+public class AddCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -34,7 +34,7 @@ public class AddEmployeeCommandTest {
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddEmployeeCommand(null);
+        new AddCommand(null);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class AddEmployeeCommandTest {
 
         CommandResult commandResult = getAddCommandForPerson(validPerson, modelStub).execute();
 
-        assertEquals(String.format(AddEmployeeCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
@@ -64,7 +64,7 @@ public class AddEmployeeCommandTest {
         Person validPerson = new PersonBuilder().build();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddEmployeeCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         getAddCommandForPerson(validPerson, modelStub).execute();
     }
@@ -73,14 +73,14 @@ public class AddEmployeeCommandTest {
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
-        AddEmployeeCommand addAliceCommand = new AddEmployeeCommand(alice);
-        AddEmployeeCommand addBobCommand = new AddEmployeeCommand(bob);
+        AddCommand addAliceCommand = new AddCommand(alice);
+        AddCommand addBobCommand = new AddCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddEmployeeCommand addAliceCommandCopy = new AddEmployeeCommand(alice);
+        AddCommand addAliceCommandCopy = new AddCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -94,10 +94,10 @@ public class AddEmployeeCommandTest {
     }
 
     /**
-     * Generates a new AddEmployeeCommand with the details of the given person.
+     * Generates a new AddCommand with the details of the given person.
      */
-    private AddEmployeeCommand getAddCommandForPerson(Person person, Model model) {
-        AddEmployeeCommand command = new AddEmployeeCommand(person);
+    private AddCommand getAddCommandForPerson(Person person, Model model) {
+        AddCommand command = new AddCommand(person);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }

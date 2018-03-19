@@ -13,23 +13,23 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class SortEmployeeCommandTest {
+public class SortCommandTest {
     private Model model;
     private Model expectedModel;
-    private SortEmployeeCommand sortEmployeeCommand;
+    private SortCommand sortCommand;
 
     @Before
     public void setUp() {
         model = new ModelManager(getTypicalAddressBookNonAlphabetically(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        sortEmployeeCommand = new SortEmployeeCommand();
-        sortEmployeeCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        sortCommand = new SortCommand();
+        sortCommand.setData(model, new CommandHistory(), new UndoRedoStack());
     }
 
     @Test
     public void executeSuccess() {
-        assertCommandSuccess(sortEmployeeCommand, model, SortEmployeeCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }
