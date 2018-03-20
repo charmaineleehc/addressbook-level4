@@ -9,13 +9,13 @@ import seedu.address.commons.events.BaseEvent;
  */
 public class SetThemeRequestEvent extends BaseEvent {
 
-    private final int selectedIndex;
+    private final Index selectedIndex;
 
     public SetThemeRequestEvent(Index selectedIndex) {
-        this.selectedIndex = selectedIndex.getOneBased();
+        this.selectedIndex = selectedIndex;
     }
 
-    public int getSelectedIndex() {
+    public Index getSelectedIndex() {
         return selectedIndex;
     }
 

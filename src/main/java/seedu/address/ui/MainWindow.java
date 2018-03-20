@@ -17,6 +17,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.SetThemeRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
@@ -31,9 +32,6 @@ import seedu.address.model.UserPrefs;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
-    private static final int THEME_INDEX_TEAL = 0;
-    private static final int THEME_INDEX_DARK = 1;
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
     private final String[] themes = {"Teal", "Dark"};
@@ -207,20 +205,8 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Sets the the theme based on user's preference
      */
-    private void setTheme(int selectedIndex) throws CommandException {
-        String themeName = "";
-
-        switch (selectedIndex) {
-        case 1:
-            themeName = themes[THEME_INDEX_TEAL];
-            break;
-        case 2:
-            themeName = themes[THEME_INDEX_DARK];
-            break;
-        default:
-            break;
-        }
-
+    private void setTheme(Index selectedIndex) throws CommandException {
+        String themeName = themes[selectedIndex.getZeroBased()];
         if (MainApp.class.getResource(FXML_FILE_FOLDER + themeName + "Theme.css") == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_FILE_PATH);
         }

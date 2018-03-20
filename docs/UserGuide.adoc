@@ -153,7 +153,7 @@ Deletes the 1st employee in the results of the `findE` command.
 
 === Changing a command word : `set`
 
-Selects the person identified by the index number used in the last person listing. +
+Selects the employee identified by the index number used in the last employee listing. +
 Format: `set OLD_COMMAND_WORD NEW_COMMAND_WORD`
 
 ****

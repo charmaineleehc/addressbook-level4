@@ -47,7 +47,7 @@ public class ThemeCommandTest {
         }
 
         SetThemeRequestEvent lastEvent = (SetThemeRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
-        assertEquals(index, Index.fromOneBased(lastEvent.getSelectedIndex()));
+        assertEquals(index, lastEvent.getSelectedIndex());
     }
 
     /**

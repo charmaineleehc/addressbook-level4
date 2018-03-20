@@ -68,10 +68,11 @@ public class AddressBookParser {
 
         String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         try {
             commandWord = commandWords.getCommandKey(commandWord);
         } catch (CommandWordException e) {
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            // do nothing, default throws parseException
         }
 
         switch (commandWord) {

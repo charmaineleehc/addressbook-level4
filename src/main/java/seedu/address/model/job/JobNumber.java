@@ -17,12 +17,17 @@ public class JobNumber {
     /**
      * Initialize the next job number of the car servicing manager
      */
-    public static void initNextJobNumber(String args) {
+    public static void initialize(String args) {
         nextJobNumber = Integer.parseInt(args);
     }
 
     public static void incrementNextJobNumber() {
         nextJobNumber++;
+    }
+
+    @Override
+    public String toString() {
+        return jobNumber;
     }
 
     @Override
