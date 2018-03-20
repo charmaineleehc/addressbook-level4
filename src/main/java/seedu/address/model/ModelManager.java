@@ -13,6 +13,8 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.logic.commands.CommandWords;
+import seedu.address.model.job.Job;
+import seedu.address.model.job.exceptions.JobNotFoundException;
 import seedu.address.model.person.Employee;
 import seedu.address.model.person.exceptions.DuplicateEmployeeException;
 import seedu.address.model.person.exceptions.EmployeeNotFoundException;
@@ -26,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<Employee> filteredEmployees;
+    private final FilteredList<Job> filteredJobs;
     private final CommandWords commandWords;
 
     /**
@@ -39,6 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
+        filteredJobs = new FilteredList<>(this.addressBook.getJobList());
         this.commandWords = userPrefs.getCommandWords();
     }
 
@@ -74,6 +78,14 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(addressBook));
+    }
+
+    @Override
+    public synchronized void addJob(Job job) {
+    }
+
+    @Override
+    public synchronized void closeJob(Job target) throws JobNotFoundException {
     }
 
     @Override
@@ -121,6 +133,23 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEmployees.setPredicate(predicate);
     }
 
+    //=========== Filtered Job List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Job} backed by the internal list of
+     * {@code addressBook}
+     */
+    @Override
+    public ObservableList<Job> getFilteredJobList() {
+        return FXCollections.unmodifiableObservableList(filteredJobs);
+    }
+
+    @Override
+    public void updateFilteredJobList(Predicate<Job> predicate) {
+        requireNonNull(predicate);
+        filteredJobs.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -137,6 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && filteredEmployees.equals(other.filteredEmployees)
+                && filteredJobs.equals(other.filteredJobs)
                 && commandWords.equals(other.getCommandWords());
     }
 
