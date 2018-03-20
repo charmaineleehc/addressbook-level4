@@ -75,6 +75,7 @@ public class TypicalPersons {
         return ab;
     }
 
+    //@@author richardson0694
     /**
      * Returns an {@code AddressBook} with all the typical persons' name non alphabetically.
      */
@@ -90,6 +91,7 @@ public class TypicalPersons {
         return ab;
     }
 
+    //@@author
     public static List<Employee> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
