@@ -230,6 +230,56 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::set[]
+=== Set command feature
+==== Current Implementation
+
+Set command keeps 2 lists of command words, the default command words and the custom user command words, which are both managed by the class `CommandWords`.
+
+The default command words are stored as a class level reference `COMMANDS`, while the custom command words are stored as a field `commands` in the object.
+
+`CommandWords` is in the `Logic` component, under `Commands`, as it is required to parse commands in `AddressBookParser`.
+
+`CommandWords` only deal with commands that have their default command word declared in the class level reference.
+
+image::SetCommandLogicDiagram.png[width="800"]+
+image::SetCommandModelDiagram.png[width="800"]+
+
+As you can see from the diagram, AddressBookParser makes a reference to CommandWords. However, `CommandWords` resides in `UserPrefs` in the `Model` component.
+
+This is to facilitate the saving of data.
+
+==== Design Considerations
+
+===== Aspect: Where to put CommandWords for storage
+
+* **Alternative 1:** Place `CommandWords` in `UserPrefs`
+** Pros: Single Responsibility Principle is maintained as custom command words in `CommandWords` is a user preference.
+** Cons: More coupling is required for the AddressBook to retrieve the custom command words.
+* **Alternative 2:** Place `CommandWords` in `AddressBook`
+** Pros: Direct access to custom words in commands.
+** Cons: Single Responsibility Principle will be violated.
+
+===== Aspect: Access to CommandWords
+
+* **Alternative 1:** `ModelManager` and member variables gets access and provides API to access `CommandWords`.
+** Pros: Write protection.
+** Cons: `CommandWords` is frequently accessed, many more APIs are required.
+* **Alternative 2 (current choice):** Provide direct access to `CommandWords` when more details are needed and keep minimal API on `ModelManager`.
+** Pros: Easy to implement, neat.
+** Cons: Accidental modification can lead to bugs, so need to be careful.
+
+
+===== Aspect: Storing the list of default command words
+
+* **Alternative 1 (current choice):** Store the default list in `CommandWords`.
+** Pros: Easier to maintain the Open-Closed Principle, also follows the Single Responsibility Principle.
+** Cons: Increased coupling.
+* **Alternative 2:** Store the default list in `Commands`.
+** Pros: Reduced coupling.
+** Cons: `Commands` is an abstract class, it is not appropriate to reference class variables.
+// end::set[]
+
 // tag::importexport[]
 === Import/Export feature #Coming in v2.0#
 ==== Current Implementation
@@ -920,6 +970,28 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [none]
 ** User can archive that may be needed for future reference. Job entries can also be analyse to keep track of the the employees' performance.
 
+*Feature contribution*:
+
+- Importing job entries from an excel file (major enhancement)
+Done by: yuhongherald
+User can specify the file path to an excel file containing the job entries in columns, and header fields to indicate the
+field contents for each row. User then reviews the changes and generates a feedback document.
+
+- Setting custom command keywords (minor enhancement)
+Done by: yuhongherald
+User can set a custom keyword that is not used on top of the original command word.
+
+*Feature contribution*:
+
+- Importing job entries from an excel file (major enhancement)
+Done by: yuhongherald
+User can specify the file path to an excel file containing the job entries in columns, and header fields to indicate the
+field contents for each row. User then reviews the changes and generates a feedback document.
+
+- Setting custom command keywords (minor enhancement)
+Done by: yuhongherald
+User can set a custom keyword that is not used on top of the original command word.
+
 [appendix]
 == User Stories
 
@@ -1290,7 +1362,6 @@ Use case ends.
 +
 Use case ends.
 
-[discrete]
 === Use case: Set theme of application
 
 *MSS*

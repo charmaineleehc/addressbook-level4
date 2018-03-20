@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandWords;
+import seedu.address.model.job.Job;
+import seedu.address.model.job.exceptions.JobNotFoundException;
 import seedu.address.model.person.Employee;
 import seedu.address.model.person.exceptions.DuplicateEmployeeException;
 import seedu.address.model.person.exceptions.EmployeeNotFoundException;
@@ -27,6 +29,12 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Adds the given job */
+    void addJob(Job job);
+
+    /** Closes the given job */
+    void closeJob(Job target) throws JobNotFoundException;
 
     /** Deletes the given employee. */
     void deletePerson(Employee target) throws EmployeeNotFoundException;
@@ -55,4 +63,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Employee> predicate);
+
+    /** Returns an unmodifiable view of the filtered job list */
+    ObservableList<Job> getFilteredJobList();
+
+    /**
+     * Updates the filter of the filtered job list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredJobList(Predicate<Job> predicate);
 }
