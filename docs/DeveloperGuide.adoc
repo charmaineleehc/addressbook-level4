@@ -512,9 +512,12 @@ The following dependencies are used:
 
 Suppose that the user typed the first email command.
 
+image::EmailAuthorization.png[width="650"]
+
 `GoogleAuthorizationCodeFlow` is used to build the authorization code flow and trigger user authorization request. It then manages and persists user `Credential`.
 
 `Credential` are then saved into a `File` so that the user need not repeatedly key in his or her authorization information before sending each email.
+
 
 To send an email, firstly, an empty `Properties` list is created, which is used to create an email `Session`. Next, a `MimeMessage`, a class in the `javax.mail.internet` package is created using that `Session`. Attributes `from`, `recipient`, `subject` and `text` of the `MimeMessage` are then set. The `Text` set contains information extracted from the particular `Job`.
 
