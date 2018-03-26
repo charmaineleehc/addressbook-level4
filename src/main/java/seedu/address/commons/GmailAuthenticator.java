@@ -1,18 +1,19 @@
 package seedu.address.commons;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleBrowserClientRequestUrl;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.people.v1.PeopleService;
-import com.google.api.services.people.v1.model.ListConnectionsResponse;
-import com.google.api.services.people.v1.model.Person;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.GetRedirectURLEvent;
-import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.util.store.FileDataStoreFactory;
+
+import com.google.api.services.gmail.GmailScopes;
+import com.google.api.services.gmail.model.*;
+import com.google.api.services.gmail.Gmail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,88 +23,69 @@ import java.util.List;
 
 public class GmailAuthenticator {
 
-    private static HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
+    private static final String APPLICATION_NAME = "CarviciM";
 
-    private static final JacksonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+    private static final java.io.File DATA_STORE_DIR = new java.io.File(
+            System.getProperty("user.home"), ".credentials/gmail-java-quickstart");
 
-    String clientId = "650819214900-b3m4dv6igjlf9q3nq9eqsbmspask57kp.apps.googleusercontent.com";
-    String clientSecret = "ttunyBEmZMrK_a9MH_qc1kus";
-    String redirectUri = "https://contacts.google.com";
+    private static FileDataStoreFactory DATA_STORE_FACTORY;
 
-    private static final String SCOPE_1 = "https://www.googleapis.com/auth/contacts.readonly";
-    private static final String SCOPE_2 = "https://www.googleapis.com/auth/plus.login";
-    private static final String SCOPE_3 = "https://www.googleapis.com/auth/user.phonenumbers.read";
-    private static final String SCOPE_4 = "https://www.googleapis.com/auth/contacts";
-    private static final String SCOPE_5 = "https://mail.google.com/";
+    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
+    private static HttpTransport HTTP_TRANSPORT;
 
-    String authorizationUrl;
+    private static final List<String> SCOPES = Arrays.asList(GmailScopes.GMAIL_LABELS);
 
-
-    //Constructor
-    public GmailAuthenticator() throws IOException {
-        InputStream in = GmailAuthenticator.class.getResourceAsStream("/client_secret.json");
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
-
-        this.authorizationUrl = new GoogleBrowserClientRequestUrl(clientSecrets, redirectUri,
-                Arrays.asList(SCOPE_1, SCOPE_2, SCOPE_3, SCOPE_4, SCOPE_5)).build();
-    }
-
-
-    //Getter for Authorization URL for user login
-    public String getAuthorizationUrl() {
-        return authorizationUrl;
-    }
-
-
-
-    //This method obtains the token from the redirect URL after successful login
-    public String getToken() {
-        String token = "";
+    static {
         try {
-            GetRedirectURLEvent event = new GetRedirectURLEvent();
-            EventsCenter.getInstance().post(event);
-            String URL = event.getReDirectURL();
-            token = URL.substring(URL.indexOf("token=") + 6, URL.indexOf("&"));
-        } catch (StringIndexOutOfBoundsException e){
-            EventsCenter.getInstance().post(new NewResultAvailableEvent("Authentication Failed. Please login again."));
+            HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+            DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            System.exit(1);
         }
-        return token;
     }
 
+    /**
+     * Creates an authorized Credential object.
+     * @return an authorized Credential object.
+     * @throws IOException
+     */
+    public static Credential authorize() throws IOException {
+        // Load client secrets.
+        InputStream in =
+                GmailAuthenticator.class.getResourceAsStream("/client_secret.json");
+        GoogleClientSecrets clientSecrets =
+                GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
-    //Obtain google credentials from token
-    public GoogleCredential getCredential(String token) throws IOException{
-
-        GoogleTokenResponse Token = new GoogleTokenResponse();
-        Token.setAccessToken(token);
-
-        GoogleCredential credential = new GoogleCredential.Builder()
-                .setTransport(HTTP_TRANSPORT)
-                .setJsonFactory(JSON_FACTORY)
-                .setClientSecrets(clientId, clientSecret)
-                .build()
-                .setFromTokenResponse(Token);
+        // Build flow and trigger user authorization request.
+        GoogleAuthorizationCodeFlow flow =
+                new GoogleAuthorizationCodeFlow.Builder(
+                        HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
+                        .setDataStoreFactory(DATA_STORE_FACTORY)
+                        .setAccessType("offline")
+                        .build();
+        Credential credential = new AuthorizationCodeInstalledApp(
+                flow, new LocalServerReceiver()).authorize("user");
+        System.out.println(
+                "Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
         return credential;
     }
 
-
-    //Build PeopleService using google credentials
-    public PeopleService BuildPeopleService(GoogleCredential credential){
-        PeopleService peopleService =
-                new PeopleService.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).build();
-        return peopleService;
+    /**
+     * Build and return an authorized Gmail client service.
+     * @return an authorized Gmail client service
+     * @throws IOException
+     */
+    public static Gmail getGmailService() throws IOException {
+        Credential credential = authorize();
+        return new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+                .setApplicationName(APPLICATION_NAME)
+                .build();
     }
 
-
-    //Obtain the list of Contacts from google
-    public List<Person> getConnections(PeopleService peopleService)  throws IOException{
-        ListConnectionsResponse response = new ListConnectionsResponse();
-        response = peopleService.people().connections().list("people/me")
-                .setPersonFields("names,emailAddresses,phoneNumbers,addresses")
-                .execute();
-        List<Person> connections = response.getConnections();
-
-        return connections;
+    public GmailAuthenticator() throws IOException {
+        getGmailService();
     }
+
 }

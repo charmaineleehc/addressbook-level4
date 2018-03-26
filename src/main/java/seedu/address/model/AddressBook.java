@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.GmailAuthenticator;
 import seedu.address.model.job.Date;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobList;

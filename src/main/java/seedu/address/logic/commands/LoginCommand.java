@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.GmailAuthenticator;
+
+import java.io.IOException;
+
 public class LoginCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "login";
@@ -10,8 +14,12 @@ public class LoginCommand extends UndoableCommand {
     public static final String MESSAGE_SUCCESS = "Please enter your authentication information";
 
     @Override
-    public CommandResult execute() {
-        model.sortPersonList();
+    public CommandResult executeUndoableCommand() {
+        try {
+            new GmailAuthenticator();
+        } catch (IOException ioe) {
+            System.exit(1);
+        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
