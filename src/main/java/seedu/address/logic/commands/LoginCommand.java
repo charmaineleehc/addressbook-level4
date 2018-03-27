@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.GmailAuthenticator;
-
 import java.io.IOException;
+
+import seedu.address.commons.GmailAuthenticator;
 
 /**
  * Directs user to the login page of Gmail for user to log in.

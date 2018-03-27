@@ -17,8 +17,8 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 
-import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.GmailScopes;
 
 /**
  * Allow for Gmail authentication process to take place
