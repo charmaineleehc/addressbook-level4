@@ -130,9 +130,6 @@ public class AddressBookParser {
         case AddJobCommand.COMMAND_WORD:
             return new AddJobCommandParser().parse(arguments);
 
-        case LoginCommand.COMMAND_WORD:
-            return new LoginCommand();
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
