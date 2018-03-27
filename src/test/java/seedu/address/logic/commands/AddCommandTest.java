@@ -8,6 +8,8 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -110,6 +112,16 @@ public class AddCommandTest {
     private class ModelStub implements Model {
         @Override
         public void addPerson(Employee employee) throws DuplicateEmployeeException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void addJobs(List<Job> job) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void addMissingEmployees(Set<Employee> employees) {
             fail("This method should not be called.");
         }
 

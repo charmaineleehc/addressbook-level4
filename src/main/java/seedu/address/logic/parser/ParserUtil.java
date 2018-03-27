@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -32,14 +33,15 @@ public class ParserUtil {
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
     public static final String MESSAGE_INSUFFICIENT_WORDS = "Command word to be changed and new command word must "
             + "be provided, separated by a space.";
+    public static final String MESSAGE_INVALID_FILENAME = "File name must be the path to an existing file, in the "
+            + "same folder as this application";
     public static final String WHITESPACE = "\\s+";
+    public static final String APPLICATION_DIRECTORY = ".\\";
 
     /**
      * Parses {@code multipleWordString} into an {@code String[]} containing command words and returns it.
      * Leading and trailing whitespaces will be trimmed.
-     * @param multipleWordString
-     * @return
-     * @throws IllegalValueException
+     * @throws IllegalValueException if words found is not equal to 2
      */
     public static String[] parseWords(String multipleWordString) throws IllegalValueException {
         String[] commandWords = multipleWordString.trim().split(WHITESPACE);
@@ -47,6 +49,20 @@ public class ParserUtil {
             throw new IllegalValueException(MESSAGE_INSUFFICIENT_WORDS);
         }
         return commandWords;
+
+    }
+
+    /**
+     * Parses {@code filePath} and checks if (@code file) specified exists.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws IllegalValueException if file does not exist
+     */
+    public static String parseFilename(String filePath) throws IllegalValueException {
+        File file = new File(filePath.trim());
+        if (!file.exists()) {
+            throw new IllegalValueException(MESSAGE_INVALID_FILENAME);
+        }
+        return APPLICATION_DIRECTORY + filePath.trim();
 
     }
 

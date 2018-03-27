@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -47,6 +49,12 @@ public interface Model {
 
     /** Adds the given employee */
     void addPerson(Employee employee) throws DuplicateEmployeeException;
+
+    /** Adds a list of (@code Job) into (@code AddressBook), and automatically imports new employees */
+    void addJobs(List<Job> job);
+
+    /** Adds employees in list into (@code AddressBook) if it is not present */
+    void addMissingEmployees(Set<Employee> employees);
 
     /** Sort all persons' name in list alphabetically. */
     void sortPersonList();

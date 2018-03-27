@@ -3,6 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -123,6 +126,26 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.addEmployee(employee);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addJobs(List<Job> jobs) {
+        for (Job job : jobs) {
+            addMissingEmployees(job.getAssignedEmployees());
+            addJob(job);
+        }
+    }
+
+    @Override
+    public void addMissingEmployees(Set<Employee> employees) {
+        Iterator<Employee> employeeIterator = employees.iterator();
+        while (employeeIterator.hasNext()) {
+            try {
+                addPerson(employeeIterator.next());
+            } catch (DuplicateEmployeeException e) {
+                // discard the result
+            }
+        }
     }
 
     @Override

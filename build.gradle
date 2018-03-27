@@ -45,6 +45,11 @@ jacocoTestReport {
 dependencies {
     String testFxVersion = '4.0.7-alpha'
 
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    compile group: 'org.apache.poi', name: 'poi', version: '3.17'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+
     compile group: 'org.fxmisc.easybind', name: 'easybind', version: '1.0.3'
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.11'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'

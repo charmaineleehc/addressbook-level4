@@ -17,6 +17,8 @@ import seedu.address.model.remark.RemarkList;
  * Represents a Job in the car servicing manager
  */
 public class Job {
+    protected final RemarkList remarks;
+
     private final Person client;
     private final VehicleNumber vehicleNumber;
     private final JobNumber jobNumber;
@@ -24,7 +26,6 @@ public class Job {
     private final Status status;
 
     private final UniqueEmployeeList assignedEmployees;
-    private final RemarkList remarks;
 
     public Job(Person client, VehicleNumber vehicleNumber, JobNumber jobNumber,
                Date date, UniqueEmployeeList assignedEmployees, Status status, RemarkList remarks) {

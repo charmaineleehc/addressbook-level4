@@ -30,6 +30,7 @@ public class CommandWords implements Serializable {
         FindCommand.COMMAND_WORD,
         HelpCommand.COMMAND_WORD,
         HistoryCommand.COMMAND_WORD,
+        ImportAllCommand.COMMAND_WORD,
         ListCommand.COMMAND_WORD,
         RedoCommand.COMMAND_WORD,
         SelectCommand.COMMAND_WORD,
@@ -124,16 +125,7 @@ public class CommandWords implements Serializable {
      */
     public void setCommandWord(String currentWord, String newWord) throws CommandWordException {
         requireNonNull(currentWord, newWord);
-        if (currentWord.equals(newWord)) {
-            throw new CommandWordException(getMessageNoChange());
-        }
-        if (isDefaultCommandWord(newWord)
-                && !commands.get(newWord).equals(currentWord)) {
-            throw new CommandWordException(getMessageOverwriteDefault(newWord));
-        }
-        if (commands.containsValue(newWord)) {
-            throw new CommandWordException(getMessageUsed(newWord));
-        }
+        checkCommandWordValidity(currentWord, newWord);
         if (isDefaultCommandWord(currentWord)) {
             commands.remove(currentWord);
             commands.put(currentWord, newWord);
@@ -150,6 +142,22 @@ public class CommandWords implements Serializable {
             }
         }
         throw new CommandWordException(getMessageUnused(currentWord));
+    }
+
+    /**
+     * throws a (@code CommandWordException) if (@code currentWord) or (@code newWord) is not valid
+     */
+    private void checkCommandWordValidity(String currentWord, String newWord) throws CommandWordException {
+        if (currentWord.equals(newWord)) {
+            throw new CommandWordException(getMessageNoChange());
+        }
+        if (isDefaultCommandWord(newWord)
+                && !commands.get(newWord).equals(currentWord)) {
+            throw new CommandWordException(getMessageOverwriteDefault(newWord));
+        }
+        if (commands.containsValue(newWord)) {
+            throw new CommandWordException(getMessageUsed(newWord));
+        }
     }
 
     /**
