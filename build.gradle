@@ -15,15 +15,11 @@ plugins {
     id 'application'
 }
 
-apply plugin: 'java'
-apply plugin: 'application'
-
 // Specifies the entry point of the application
 mainClassName = 'seedu.address.MainApp'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-version = '1.0'
 
 repositories {
     mavenCentral()
