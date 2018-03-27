@@ -4,6 +4,9 @@ import seedu.address.commons.GmailAuthenticator;
 
 import java.io.IOException;
 
+/**
+ * Directs user to the login page of Gmail for user to log in.
+ */
 public class LoginCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "login";
