@@ -14,7 +14,7 @@ public class LoginCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Logs in user into Gmail account.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Please enter your authentication information";
+    public static final String MESSAGE_SUCCESS = "You have successfully logged into your Gmail account!";
 
     @Override
     public CommandResult executeUndoableCommand() {
