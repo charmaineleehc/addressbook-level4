@@ -132,7 +132,7 @@ public class AddressBookParser {
 
         case LoginCommand.COMMAND_WORD:
             return new LoginCommand();
-            
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
