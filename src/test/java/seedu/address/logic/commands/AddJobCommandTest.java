@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.fail;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -20,11 +21,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.job.DateRange;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobNumber;
 import seedu.address.model.job.VehicleNumber;
@@ -55,6 +56,7 @@ public class AddJobCommandTest {
         ArrayList<Index> indices = generateValidEmployeeIndices();
         AddJobCommand addJobCommand = prepareCommand(client,
                 new VehicleNumber(VehicleNumber.DEFAULT_VEHICLE_NUMBER), indices);
+        JobNumber.initialize(0);
 
         CommandResult commandResult = addJobCommand.execute();
 
@@ -63,6 +65,28 @@ public class AddJobCommandTest {
         assertEquals(String.format(AddJobCommand.MESSAGE_SUCCESS, validJob), commandResult.feedbackToUser);
     }
 
+    @Test
+    public void equals() throws Exception {
+        Person aliceClient = new ClientBuilder().withName("Alice").build();
+        Person bobClient = new ClientBuilder().withName("Bob").build();
+
+        AddJobCommand addJobWithClientAliceCommand = prepareCommand(aliceClient,
+                new VehicleNumber(VehicleNumber.DEFAULT_VEHICLE_NUMBER), generateValidEmployeeIndices());
+        AddJobCommand addJobWithClientBobCommand = prepareCommand(bobClient,
+                new VehicleNumber(VehicleNumber.DEFAULT_VEHICLE_NUMBER), generateValidEmployeeIndices());
+
+        // same object -> returns true
+        assertTrue(addJobWithClientAliceCommand.equals(addJobWithClientAliceCommand));
+
+        // same values -> returns true
+        JobNumber.initialize(0);
+        AddJobCommand addJobWithClientAliceCommandCopy = new AddJobCommand(aliceClient,
+                new VehicleNumber(VehicleNumber.DEFAULT_VEHICLE_NUMBER), generateValidEmployeeIndices());
+        assertTrue(addJobWithClientAliceCommand.equals(addJobWithClientAliceCommandCopy));
+
+        // different job -> returns false
+        assertFalse(addJobWithClientAliceCommand.equals(addJobWithClientBobCommand));
+    }
 
     /**
      * A default model stub that have all of the methods failing.
@@ -121,6 +145,11 @@ public class AddJobCommandTest {
         }
 
         @Override
+        public void archiveJob(DateRange dateRange) {
+            fail("This method should not be called");
+        }
+
+        @Override
         public void deletePerson(Employee target) throws EmployeeNotFoundException {
             fail("This method should not be called.");
         }
@@ -160,40 +189,6 @@ public class AddJobCommandTest {
     }
 
     /**
-     * A Model stub that always throw a DuplicateEmployeeException when trying to add a employee.
-     */
-    private class ModelStubThrowingDuplicatePersonException extends ModelStub {
-        @Override
-        public void addPerson(Employee employee) throws DuplicateEmployeeException {
-            throw new DuplicateEmployeeException();
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
-
-    /**
-     * A Model stub that always accept the employee being added.
-     */
-    private class ModelStubAcceptingJobAdded extends ModelStub {
-        final ArrayList<Job> personsAdded = new ArrayList<>();
-
-        @Override
-        public void addJob(Job job) {
-            requireNonNull(job);
-            personsAdded.add(job);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
-    /**
      * Generates an Arraylist of valid assigned employee index
      */
     private ArrayList<Index> generateValidEmployeeIndices() {
@@ -210,7 +205,6 @@ public class AddJobCommandTest {
      * @param indices
      */
     private AddJobCommand prepareCommand(Person client, VehicleNumber vehicleNumber, ArrayList<Index> indices) {
-        JobNumber.initialize("0");
         AddJobCommand addJobCommand = new AddJobCommand(client, vehicleNumber, indices);
         addJobCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return addJobCommand;
