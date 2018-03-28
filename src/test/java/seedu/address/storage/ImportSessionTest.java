@@ -1,11 +1,5 @@
 package seedu.address.storage;
 
-import java.io.File;
-
-import org.junit.Test;
-
-import seedu.address.storage.session.ImportSession;
-
 public class ImportSessionTest {
    /* @Test
     public void importTestFileWithErrorCorrection() throws Exception {
