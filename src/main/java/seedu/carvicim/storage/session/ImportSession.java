@@ -151,27 +151,4 @@ public class ImportSession {
         inFile = null;
         outFile = null;
     }
-
-    /**
-     * For localized testing purposes
-     */
-    public static void main(String[] args) {
-        ImportSession importSession = getInstance();
-        String path;
-        try {
-            path = new File(".").getCanonicalPath();
-            System.out.println(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            importSession.initializeSession(
-                    ".\\src\\test\\resources\\model.session.ImportSessionTest\\CS2103-testsheet.xlsx");
-            importSession.reviewAllRemainingJobEntries(true);
-            importSession.closeSession();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 }

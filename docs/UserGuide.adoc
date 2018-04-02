@@ -330,13 +330,14 @@ Examples:
 
 ==== Sharing your feedback with your employees
 
-If you want to share your feedback, you can export it as an excel file, reflecting accept/reject with comments.
-Format: `export FILE_PATH`
+If you want to share your feedback, you can save it as an excel file, reflecting accept/reject with comments.
+Format: `save FILE_PATH`
 
 [TIP]
 ====
 * You can type any filename supported by your computer's storage format.
-* If you forgot to export your feedback, you can find it under C:\User\Documents\CarviciM\feedback.xls.
+* If you forgot to save your feedback, you can find it in the same directory as the imported excel file, with the time
+it is saved added to the end of the filename.
 * The feedback file's format is support for future imports.
 ====
 
