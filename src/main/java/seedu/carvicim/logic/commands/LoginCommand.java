@@ -16,6 +16,8 @@ public class LoginCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "You have successfully logged into your Gmail account!";
 
+    private boolean isLoggedIn;
+
     @Override
     public CommandResult executeUndoableCommand() {
         try {
@@ -23,6 +25,8 @@ public class LoginCommand extends UndoableCommand {
         } catch (IOException ioe) {
             System.exit(1);
         }
+
+        isLoggedIn = true;
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

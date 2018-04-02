@@ -36,7 +36,9 @@ public class GmailAuthenticator {
 
     private static HttpTransport httpTransport;
 
-    private static final List<String> SCOPES = Arrays.asList(GmailScopes.GMAIL_LABELS);
+    private static String scope = "https://mail.google.com/";
+
+    private Gmail gmailService;
 
     static {
         try {
@@ -48,12 +50,16 @@ public class GmailAuthenticator {
         }
     }
 
+    public Gmail getGmailService() {
+        return gmailService;
+    }
+
     /**
      * Creates a GmailAuthenticator to authenticate user.
      * @throws IOException
      */
     public GmailAuthenticator() throws IOException {
-        getGmailService();
+        this.gmailService = buildGmailService();
     }
 
     /**
@@ -71,7 +77,7 @@ public class GmailAuthenticator {
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow =
                 new GoogleAuthorizationCodeFlow.Builder(
-                        httpTransport, JSON_FACTORY, clientSecrets, SCOPES)
+                        httpTransport, JSON_FACTORY, clientSecrets, Arrays.asList(scope))
                         .setDataStoreFactory(dataStoreFactory)
                         .setAccessType("offline")
                         .build();
@@ -87,7 +93,7 @@ public class GmailAuthenticator {
      * @return an authorized Gmail client service
      * @throws IOException
      */
-    public static Gmail getGmailService() throws IOException {
+    public static Gmail buildGmailService() throws IOException {
         Credential credential = authorize();
         return new Gmail.Builder(httpTransport, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)

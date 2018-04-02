@@ -14,6 +14,7 @@ import seedu.carvicim.logic.commands.Command;
 import seedu.carvicim.logic.commands.CommandWords;
 import seedu.carvicim.logic.commands.DeleteEmployeeCommand;
 import seedu.carvicim.logic.commands.EditCommand;
+import seedu.carvicim.logic.commands.EmailCommand;
 import seedu.carvicim.logic.commands.ExitCommand;
 import seedu.carvicim.logic.commands.FindEmployeeCommand;
 import seedu.carvicim.logic.commands.HelpCommand;
@@ -30,6 +31,7 @@ import seedu.carvicim.logic.commands.UndoCommand;
 
 import seedu.carvicim.logic.commands.exceptions.CommandWordException;
 import seedu.carvicim.logic.parser.exceptions.ParseException;
+import seedu.carvicim.model.person.Email;
 
 /**
  * Parses user input.
@@ -136,6 +138,9 @@ public class CarvicimParser {
 
         case LoginCommand.COMMAND_WORD:
             return new LoginCommand();
+
+        case EmailCommand.COMMAND_WORD:
+            return new EmailCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
