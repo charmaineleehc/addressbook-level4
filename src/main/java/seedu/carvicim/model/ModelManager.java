@@ -37,6 +37,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Job> filteredJobs;
     private final CommandWords commandWords;
 
+    private boolean isViewingImportedJobs;
+
     /**
      * Initializes a ModelManager with the given carvicim and userPrefs.
      */
@@ -50,10 +52,19 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEmployees = new FilteredList<>(this.carvicim.getEmployeeList());
         filteredJobs = new FilteredList<>(this.carvicim.getJobList());
         this.commandWords = userPrefs.getCommandWords();
+        isViewingImportedJobs = false;
     }
 
     public ModelManager() {
         this(new Carvicim(), new UserPrefs());
+    }
+
+    public boolean isViewingImportedJobs() {
+        return isViewingImportedJobs;
+    }
+
+    public void switchJobView() {
+        isViewingImportedJobs = !isViewingImportedJobs;
     }
 
     //@@author whenzei

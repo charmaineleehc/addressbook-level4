@@ -86,7 +86,7 @@ These are the command format for the user guide:
 You can use this command to bring up the help menu. +
 Format: `help`
 
-=== Adding an job entry: `addj`
+=== Adding a job entry: `addj`
 
 You can use this command to add a job to CarviciM. +
 Format: `addj n/NAME p/PHONE_NUMBER e/EMAIL v/VEHICLE_NUMBER w/ASSIGNED_EMPLOYEE_INDEX+`
@@ -117,6 +117,18 @@ Examples:
 *** You will see "Job 123 closed" in the <<result-display,result display>>. +
 *** You will not see job of number 123 in the <<jobs-ui-panel,jobs UI panel>>.
 
+=== Adding remark to a job: `remark`
+
+You can use this command to add a remark to a specified job. +
+Format: `remark j/JOB_NUMBER r/REMARK`
+
+Examples:
+
+** Example 1: +
+. `remark j/3 r/Take note of the headlights` +
+*** You will see "Remark added: ..." followed by the details of the remark in the result display. +
+*** You will see the newly added remark in the <<job-display-panel,job display panel>>, when the job is selected.
+
 === Adding an employee: `adde`
 
 You can use this command to add an employee to CarviciM. +
@@ -134,25 +146,6 @@ Examples:
 
 You can use this command to view a list of all employees in CarviciM. +
 Format: `liste`
-
-=== Editing a employee : `edite`
-
-You can use this command to edit an existing employee in CarviciM. +
-Format: `edite INDEX [p/PHONE] [e/EMAIL] [t/TAG]...`
-
-****
-* Edits the employee at the specified `INDEX`. The index refers to the index number shown in the last employee listing. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-****
-
-Examples:
-
-** Example 1: +
-. `edite 1 p/91234567 e/johndoe@example.com` +
-*** Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively. +
-*** You will see "Edited Employee: ... " followed by the new updated details of the employee in the <<result-display,result display>>. +
-*** You will see the edited employee details in the <<employees-ui-panel,employee UI panel>>.
 
 === Locating employees by name: `finde`
 
@@ -393,7 +386,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify CarviciM's content (`addj, `closej`, `adde`, `deletee`, `edit` and `cleare`).
+Undoable commands: those commands that modify CarviciM's content (`addj, `closej`, `adde`, `deletee` and `remark`).
 ====
 
 Examples:
@@ -446,11 +439,6 @@ Examples:
 *** You will see that the same employee is removed from the employees UI panel.
 // end::undoredo[]
 
-=== Clearing all employees : `cleare`
-
-You can use this command to clear all employees from CarviciM. +
-Format: `cleare`
-
 === Exiting the program : `exit`
 
 You can use this command to exit the program. +
@@ -479,17 +467,16 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add Job* `adde n/NAME p/PHONE_NUMBER e/EMAIL v/VEHICLE_NUMBER w/ASSIGNED_EMPLOYEE_INDEX+` +
+* *Add Job* `addj n/NAME p/PHONE_NUMBER e/EMAIL v/VEHICLE_NUMBER w/ASSIGNED_EMPLOYEE_INDEX+` +
 e.g. `addj n/James Ho p/22224444 e/jamesho@example.com v/saa213 w/22`
 * *Close Job* `closej JOB_NUMBER` +
 e.g. `closej 1232`
+* *Add Remark* `remark j/JOB_NUMBER r/REMARK` +
+e.g. `remark j/12 r/Urgent`
 * *Add Employee* `adde n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...` +
 e.g. `adde n/James Ho p/22224444 e/jamesho@example.com t/mechanic`
-* *Clear Employees* : `cleare`
 * *Delete Employee* : `deletee INDEX` +
 e.g. `deletee 3`
-* *Edit Employee* : `edite INDEX [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...` +
-e.g. `edite 2 e/jameslee@example.com`
 * *Find Employees* : `finde KEYWORD [MORE_KEYWORDS]` +
 e.g. `finde James Jake`
 * *List Employee* : `liste`
@@ -499,7 +486,7 @@ e.g. `import excel.xls`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Email Assigned Employees Of A Job* : `email` +
+* *Email Assigned Employees Of A Job* : `email JOB_NUMBER` +
 e.g. `email 123`
 * *Change <<command-word,Command Word>>* : `set` +
 e.g. `set add a`
@@ -515,6 +502,9 @@ A region on the User Interface which displays the list of jobs.
 
 [[employees-ui-panel]] Employees UI Panel::
 A region on the User Interface which displays the list of employees.
+
+[[job-display-panel]] Job Display Panel::
+A region on the User Interface which display the details of a job.
 
 [[result-display]] Result Display::
 A region on the User Interface which displays the result of executed commands.

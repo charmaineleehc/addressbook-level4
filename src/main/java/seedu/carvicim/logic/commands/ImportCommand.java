@@ -2,28 +2,26 @@ package seedu.carvicim.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.carvicim.commons.core.EventsCenter;
+import seedu.carvicim.commons.events.ui.DisplayAllJobsEvent;
 import seedu.carvicim.logic.commands.exceptions.CommandException;
 import seedu.carvicim.model.job.Job;
 import seedu.carvicim.storage.session.ImportSession;
-import seedu.carvicim.storage.session.exceptions.DataIndexOutOfBoundsException;
 import seedu.carvicim.storage.session.exceptions.FileAccessException;
 import seedu.carvicim.storage.session.exceptions.FileFormatException;
-import seedu.carvicim.storage.session.exceptions.UnitializedException;
 
 //@@author yuhongherald
+
 /**
- * Attempts to import all (@code JobEntry) into Servicing Manager
+ * Attempts to import specified file into Servicing Manager
  */
-public class ImportAllCommand extends UndoableCommand {
+public class ImportCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "importAll";
+    public static final String COMMAND_WORD = "import";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports job entries from from an excel file. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports an excel file for reviewing. "
             + "Parameters: FILEPATH\n"
             + "Example: " + COMMAND_WORD + "yourfile.xls";
 
@@ -31,7 +29,7 @@ public class ImportAllCommand extends UndoableCommand {
 
     private final String filePath;
 
-    public ImportAllCommand(String filePath) {
+    public ImportCommand(String filePath) {
         requireNonNull(filePath);
         this.filePath = filePath;
     }
@@ -51,27 +49,23 @@ public class ImportAllCommand extends UndoableCommand {
             throw new CommandException("Excel file first row headers are not defined properly. "
                     + "Type 'help' to read more.");
         }
-        try {
-            importSession.reviewAllRemainingJobEntries(true);
-            List<Job> jobs = new ArrayList<>(importSession.getSessionData().getReviewedJobEntries());
-            model.addJobs(jobs);
-            importSession.closeSession();
-            return new CommandResult(getMessageSuccess(jobs.size()));
-        } catch (DataIndexOutOfBoundsException e) {
-            throw new CommandException("Excel file has bad format. Try copying the cell values into a new excel file "
-                    + "before trying again");
-        } catch (IOException e) {
-            throw new CommandException("Unable to export file. Please close the application and try again.");
-        } catch (UnitializedException e) {
-            throw new CommandException(e.getMessage());
+
+        ObservableList<Job> jobList = FXCollections.observableList(
+                    ImportSession.getInstance().getSessionData().getUnreviewedJobEntries());
+        if (!model.isViewingImportedJobs()) {
+            model.switchJobView();
         }
+        EventsCenter.getInstance().post(
+                new DisplayAllJobsEvent(FXCollections.unmodifiableObservableList(jobList)));
+        return new CommandResult(getMessageSuccess(importSession.getSessionData()
+                .getUnreviewedJobEntries().size()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ImportAllCommand // instanceof handles nulls
-                && filePath.equals(((ImportAllCommand) other).filePath));
+                || (other instanceof ImportCommand // instanceof handles nulls
+                && filePath.equals(((ImportCommand) other).filePath));
     }
 
 }

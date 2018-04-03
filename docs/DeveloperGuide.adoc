@@ -437,7 +437,7 @@ image::SessionComponentClassDiagram.png[width="800"]
  with a timestamp added to the back of the filename.
 
 `ImportSession` is designed to be stateless on its own, with all data stored in `SessionData`. This helps to
-support `UndoableCommand`
+support `UndoableCommand`. Currently, `SessionData` is not persistent in the event of a crash.
 
 The flow of using `ImportSession` is as follows:
 

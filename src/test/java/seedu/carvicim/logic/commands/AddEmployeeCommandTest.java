@@ -126,6 +126,15 @@ public class AddEmployeeCommandTest {
             fail("This method should not be called.");
         }
 
+        @Override public boolean isViewingImportedJobs() {
+            fail("This method should not be called.");
+            return false;
+        }
+
+        @Override public void switchJobView() {
+            fail("This method should not be called.");
+        }
+
         @Override
         public void resetData(ReadOnlyCarvicim newData, CommandWords newCommandWords) {
             fail("This method should not be called.");
