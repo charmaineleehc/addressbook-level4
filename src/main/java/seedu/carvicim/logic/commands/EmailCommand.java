@@ -15,6 +15,7 @@ import com.google.api.services.gmail.model.Message;
 
 import seedu.carvicim.commons.GmailAuthenticator;
 
+//@@author charmaineleehc
 /**
  * Sends email to employee.
  */

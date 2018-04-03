@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import seedu.carvicim.commons.GmailAuthenticator;
 
+//@@author charmaineleehc
 /**
  * Directs user to the login page of Gmail for user to log in.
  */

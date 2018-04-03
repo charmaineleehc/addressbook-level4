@@ -18,6 +18,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 
 import com.google.api.services.gmail.Gmail;
 
+//@@author charmaineleehc-reused
 /**
  * Allow for Gmail authentication process to take place
  */
@@ -69,13 +70,9 @@ public class GmailAuthenticator {
      * @throws IOException
      */
     public static Credential authorize() throws IOException {
-        // Load client secrets.
-        InputStream in =
-                GmailAuthenticator.class.getResourceAsStream("/client_secret.json");
-        GoogleClientSecrets clientSecrets =
-                GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+        InputStream in = GmailAuthenticator.class.getResourceAsStream("/client_secret.json");
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
-        // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow =
                 new GoogleAuthorizationCodeFlow.Builder(
                         httpTransport, JSON_FACTORY, clientSecrets, Arrays.asList(scope))
