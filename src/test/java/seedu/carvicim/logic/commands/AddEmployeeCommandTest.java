@@ -135,6 +135,10 @@ public class AddEmployeeCommandTest {
             fail("This method should not be called.");
         }
 
+        @Override public void resetJobView() {
+            fail("This method should not be called.");
+        }
+
         @Override
         public void resetData(ReadOnlyCarvicim newData, CommandWords newCommandWords) {
             fail("This method should not be called.");
