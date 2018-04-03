@@ -8,12 +8,12 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import seedu.carvicim.commons.GmailAuthenticator;
+import org.apache.commons.codec.binary.Base64;
 
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.Message;
 
-import org.apache.commons.codec.binary.Base64;
+import seedu.carvicim.commons.GmailAuthenticator;
 
 /**
  * Sends email to employee.
