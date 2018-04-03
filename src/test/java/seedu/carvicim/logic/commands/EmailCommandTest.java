@@ -12,7 +12,7 @@ import seedu.carvicim.model.UserPrefs;
 
 public class EmailCommandTest {
 
-    private Model model;
+    /*private Model model;
 
     @Before
     public void setUp() {
@@ -24,6 +24,6 @@ public class EmailCommandTest {
         EmailCommand emailCommand = new EmailCommand();
         CommandResult commandResult = emailCommand.executeUndoableCommand();
         assertEquals(EmailCommand.MESSAGE_SUCCESS, commandResult.feedbackToUser);
-    }
+    }*/
 
 }
