@@ -39,7 +39,6 @@ import seedu.carvicim.logic.commands.UndoCommand;
 
 import seedu.carvicim.logic.commands.exceptions.CommandWordException;
 import seedu.carvicim.logic.parser.exceptions.ParseException;
-import seedu.carvicim.model.person.Email;
 
 /**
  * Parses user input.

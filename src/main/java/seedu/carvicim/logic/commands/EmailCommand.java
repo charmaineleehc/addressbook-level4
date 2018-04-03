@@ -1,22 +1,21 @@
 package seedu.carvicim.logic.commands;
 
-import seedu.carvicim.commons.GmailAuthenticator;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import seedu.carvicim.commons.GmailAuthenticator;
 
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.Message;
 
 import org.apache.commons.codec.binary.Base64;
 
-/*
+/**
  * Sends email to employee.
  */
 public class EmailCommand extends UndoableCommand {

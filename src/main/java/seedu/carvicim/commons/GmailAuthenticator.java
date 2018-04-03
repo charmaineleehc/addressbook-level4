@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.List;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -18,7 +17,6 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 
 import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.GmailScopes;
 
 /**
  * Allow for Gmail authentication process to take place
@@ -50,16 +48,19 @@ public class GmailAuthenticator {
         }
     }
 
-    public Gmail getGmailService() {
-        return gmailService;
-    }
-
     /**
      * Creates a GmailAuthenticator to authenticate user.
      * @throws IOException
      */
     public GmailAuthenticator() throws IOException {
         this.gmailService = buildGmailService();
+    }
+
+    /**
+     * @return a Gmail service
+     */
+    public Gmail getGmailService() {
+        return gmailService;
     }
 
     /**
