@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static seedu.carvicim.testutil.TypicalEmployees.getTypicalCarvicim;
 
 import org.junit.Before;
-
 import org.junit.Test;
+
 import seedu.carvicim.model.Model;
 import seedu.carvicim.model.ModelManager;
 import seedu.carvicim.model.UserPrefs;
