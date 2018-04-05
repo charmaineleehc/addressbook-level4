@@ -49,7 +49,7 @@ This user guide shows you how to get started using the CarviciM. It shows you ho
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  You can download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  You can download the latest `CarviciM.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your CarviciM.
 .  Double-click the file to start the app. You should see the Graphical User Interface (GUI) in a few seconds.
 +
@@ -109,14 +109,14 @@ Examples:
 === Closing a job entry: `closej`
 
 You can use this command to close an ongoing job based on its job number. +
-Format: `closej p/JOB_NUMBER`
+Format: `closej j/JOB_NUMBER`
 
 Examples:
 
 ** Example 1: +
-. `closej 123` +
+. `closej j/123` +
 *** Closes the ongoing job of number 123 in CarviciM. +
-*** You will see "Job 123 closed" in the <<result-display,result display>>. +
+*** You will see "Closed Job: 123" in the <<result-display,result display>>. +
 *** You will not see job of number 123 in the <<jobs-ui-panel,jobs UI panel>>.
 
 === Adding remark to a job: `remark`
@@ -567,7 +567,7 @@ _{explain how the user can enable/disable data encryption}_
 * *Add Job* `addj n/NAME p/PHONE_NUMBER e/EMAIL v/VEHICLE_NUMBER w/ASSIGNED_EMPLOYEE_INDEX+` +
 e.g. `addj n/James Ho p/22224444 e/jamesho@example.com v/saa213 w/22`
 * *Close Job* `closej p/JOB_NUMBER` +
-e.g. `closej p/1232`
+e.g. `closej j/1232`
 * *Add Remark* `remark j/JOB_NUMBER r/REMARK` +
 e.g. `remark j/12 r/Urgent`
 * *Archive job entries* `archive sd/START_DATE ed/END_DATE` +
