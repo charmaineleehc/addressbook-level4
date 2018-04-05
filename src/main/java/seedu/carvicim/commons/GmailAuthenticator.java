@@ -24,10 +24,10 @@ import com.google.api.services.gmail.Gmail;
  */
 public class GmailAuthenticator {
 
-    private static final String APPLICATION_NAME = "Carvicim";
+    private static final String APPLICATION_NAME = "CarviciM";
 
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
-            System.getProperty("user.home"), ".credentials/gmail-java-quickstart");
+            "./src/main/resources/.credentials/carvicim-gmail");
 
     private static FileDataStoreFactory dataStoreFactory;
 

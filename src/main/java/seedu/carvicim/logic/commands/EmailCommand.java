@@ -31,7 +31,7 @@ public class EmailCommand extends UndoableCommand {
 
     //these fields are temporarily static final, will no longer be so in v1.5
     private static final String EMAIL_ID = "me";
-    private static final String EMAIL_ADDRESS = "sugicharmcanfly@gmail.com";
+    private static final String EMAIL_ADDRESS = "carvicim@gmail.com";
     private static final String EMAIL_SUBJECT = "Job details";
     private static final String EMAIL_CONTENT = "Hello! :)";
 

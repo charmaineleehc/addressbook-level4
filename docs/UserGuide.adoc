@@ -17,7 +17,7 @@ By: `Team W09-B1`      Since: `Feb 2018`      Licence: `MIT`
 
 == Introduction
 
-CarviciM (Car Servicing Manager) is a desktop application for *managing car servicing jobs*. You can use Carvicim to add jobs, close ongoing jobs, import large number of job entries, manage employees for job assignment and notify employees of jobs through email. CarviciM is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CarviciM can get your management of servicing jobs done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Welcome to CatviciM! CarviciM (short for Car Servicing Manager) is a desktop application for *car servicing managers* to *manage car servicing jobs with convenience and ease*. You can use Carvicim to add jobs, close ongoing jobs, import large number of job entries, manage employees for job assignment and notify employees of jobs through email. CarviciM is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CarviciM can get your management of servicing jobs done faster than traditional GUI apps. Interested to speed up your car servicing job allocation process? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == About This User Guide
 
@@ -68,6 +68,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Features]]
 == Features
+
+This section will explain to you how you can use the features of CarviciM.
 
 ====
 *Command Format*
@@ -537,15 +539,7 @@ Format: `exit`
 CarviciM data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Login to Gmail : `login`
-
-You can use this command to login to Gmail. This command will direct you to the login page of Google. +
-Format: `login`
-
-[NOTE]
-====
-After you have successfully logged in, Google will ask if you allow CarviciM to access your Gmail. Click on `Allow`.
-====
+For your convenience, authorization information will be stored on your computer's file system, even after closing and reopening CarviciM, so you will never need to log in again.
 
 === Email assigned employees belonging to a job : `email`
 

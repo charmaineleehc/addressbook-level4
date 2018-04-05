@@ -145,9 +145,6 @@ public class CarvicimParser {
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
 
-        case LoginCommand.COMMAND_WORD:
-            return new LoginCommand();
-
         case EmailCommand.COMMAND_WORD:
             return new EmailCommand();
 
