@@ -11,13 +11,16 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import org.apache.commons.codec.binary.Base64;
 
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.Message;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import org.apache.commons.codec.binary.Base64;
+
 import seedu.carvicim.commons.core.ComponentManager;
 import seedu.carvicim.commons.core.EventsCenter;
 import seedu.carvicim.commons.core.LogsCenter;
@@ -25,21 +28,18 @@ import seedu.carvicim.commons.events.model.CarvicimChangedEvent;
 import seedu.carvicim.commons.events.ui.DisplayAllJobsEvent;
 import seedu.carvicim.commons.events.ui.JobDisplayPanelResetRequestEvent;
 import seedu.carvicim.logic.commands.CommandWords;
-import seedu.carvicim.logic.commands.exceptions.CommandException;
 import seedu.carvicim.model.job.DateRange;
 import seedu.carvicim.model.job.Job;
 import seedu.carvicim.model.job.JobList;
-import seedu.carvicim.model.job.JobNumber;
 import seedu.carvicim.model.job.exceptions.JobNotFoundException;
 import seedu.carvicim.model.person.Employee;
 import seedu.carvicim.model.person.exceptions.DuplicateEmployeeException;
 import seedu.carvicim.model.person.exceptions.EmployeeNotFoundException;
 import seedu.carvicim.storage.session.ImportSession;
 
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * Represents the in-memory model of the carvicim book data.

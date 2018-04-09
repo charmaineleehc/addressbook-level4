@@ -1,5 +1,8 @@
 package seedu.carvicim.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.carvicim.logic.parser.CliSyntax.PREFIX_JOB_NUMBER;
+
 import java.io.IOException;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -14,9 +17,6 @@ import seedu.carvicim.model.job.Job;
 import seedu.carvicim.model.job.JobNumber;
 import seedu.carvicim.model.person.Employee;
 import seedu.carvicim.model.person.UniqueEmployeeList;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.carvicim.logic.parser.CliSyntax.PREFIX_JOB_NUMBER;
 
 //@@author charmaineleehc
 /**

@@ -1,19 +1,26 @@
 package seedu.carvicim.logic.parser;
 
+import static seedu.carvicim.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.carvicim.logic.parser.CliSyntax.PREFIX_JOB_NUMBER;
+
+import java.util.stream.Stream;
+
 import seedu.carvicim.commons.exceptions.IllegalValueException;
-import seedu.carvicim.logic.commands.AddJobCommand;
 import seedu.carvicim.logic.commands.EmailCommand;
 import seedu.carvicim.logic.parser.exceptions.ParseException;
 import seedu.carvicim.model.job.JobNumber;
 
-import java.util.stream.Stream;
-
-import static seedu.carvicim.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.carvicim.logic.parser.CliSyntax.PREFIX_JOB_NUMBER;
-
 //@@author charmaineleehc
+/**
+ * Parses input arguments and creates a new EmailCommand object
+ */
 public class EmailCommandParser implements Parser<EmailCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the EmailCommand
+     * and returns an EmailCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public EmailCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_JOB_NUMBER);
 
