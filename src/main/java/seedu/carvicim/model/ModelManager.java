@@ -3,15 +3,21 @@ package seedu.carvicim.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.carvicim.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.model.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import org.apache.commons.codec.binary.Base64;
 import seedu.carvicim.commons.core.ComponentManager;
 import seedu.carvicim.commons.core.EventsCenter;
 import seedu.carvicim.commons.core.LogsCenter;
@@ -27,6 +33,11 @@ import seedu.carvicim.model.person.Employee;
 import seedu.carvicim.model.person.exceptions.DuplicateEmployeeException;
 import seedu.carvicim.model.person.exceptions.EmployeeNotFoundException;
 import seedu.carvicim.storage.session.ImportSession;
+
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * Represents the in-memory model of the carvicim book data.
@@ -211,6 +222,67 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public JobList analyseJob(JobList jobList) {
         return carvicim.analyseJob(jobList);
+    }
+
+    /**
+     * Create a MimeMessage using the parameters provided.
+     *
+     * @param to email address of the receiver
+     * @param from email address of the sender, the mailbox account
+     * @param subject subject of the email
+     * @param bodyText body text of the email
+     * @return the MimeMessage to be used to send email
+     * @throws javax.mail.MessagingException
+     */
+    public static MimeMessage createEmail(
+            String to, String from, String subject, String bodyText) throws MessagingException {
+        Properties props = new Properties();
+        Session session = Session.getDefaultInstance(props, null);
+
+        MimeMessage email = new MimeMessage(session);
+
+        email.setFrom(new InternetAddress(from));
+        email.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(to));
+        email.setSubject(subject);
+        email.setText(bodyText);
+        return email;
+    }
+
+    /**
+     * Create a message from an email.
+     *
+     * @param emailContent Email to be set to raw of message
+     * @return a message containing a base64url encoded email
+     * @throws java.io.IOException
+     * @throws MessagingException
+     */
+    public static Message createMessageWithEmail(MimeMessage emailContent) throws MessagingException, IOException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        emailContent.writeTo(buffer);
+        byte[] bytes = buffer.toByteArray();
+        String encodedEmail = Base64.encodeBase64URLSafeString(bytes);
+        Message message = new Message();
+        message.setRaw(encodedEmail);
+        return message;
+    }
+
+    /**
+     * Send an email from the user's mailbox to its recipient.
+     *
+     * @param service Authorized Gmail API instance.
+     * @param userId User's email address. The special value "me"
+     * can be used to indicate the authenticated user.
+     * @param emailContent Email to be sent.
+     * @return The sent message
+     * @throws MessagingException
+     * @throws IOException
+     */
+    public static Message sendMessage(
+            Gmail service, String userId, MimeMessage emailContent) throws MessagingException, IOException {
+        Message message = createMessageWithEmail(emailContent);
+        message = service.users().messages().send(userId, message).execute();
+
+        return message;
     }
 
     //=========== Filtered Employee List Accessors =============================================================
