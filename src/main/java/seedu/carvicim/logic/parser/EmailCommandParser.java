@@ -1,6 +1,7 @@
 package seedu.carvicim.logic.parser;
 
 import seedu.carvicim.commons.exceptions.IllegalValueException;
+import seedu.carvicim.logic.commands.AddJobCommand;
 import seedu.carvicim.logic.commands.EmailCommand;
 import seedu.carvicim.logic.parser.exceptions.ParseException;
 import seedu.carvicim.model.job.JobNumber;
@@ -10,7 +11,8 @@ import java.util.stream.Stream;
 import static seedu.carvicim.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.carvicim.logic.parser.CliSyntax.PREFIX_JOB_NUMBER;
 
-public class EmailCommandParser {
+//@@author charmaineleehc
+public class EmailCommandParser implements Parser<EmailCommand> {
 
     public EmailCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_JOB_NUMBER);

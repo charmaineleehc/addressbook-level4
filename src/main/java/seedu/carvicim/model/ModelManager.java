@@ -25,9 +25,11 @@ import seedu.carvicim.commons.events.model.CarvicimChangedEvent;
 import seedu.carvicim.commons.events.ui.DisplayAllJobsEvent;
 import seedu.carvicim.commons.events.ui.JobDisplayPanelResetRequestEvent;
 import seedu.carvicim.logic.commands.CommandWords;
+import seedu.carvicim.logic.commands.exceptions.CommandException;
 import seedu.carvicim.model.job.DateRange;
 import seedu.carvicim.model.job.Job;
 import seedu.carvicim.model.job.JobList;
+import seedu.carvicim.model.job.JobNumber;
 import seedu.carvicim.model.job.exceptions.JobNotFoundException;
 import seedu.carvicim.model.person.Employee;
 import seedu.carvicim.model.person.exceptions.DuplicateEmployeeException;
@@ -224,6 +226,7 @@ public class ModelManager extends ComponentManager implements Model {
         return carvicim.analyseJob(jobList);
     }
 
+    //@@author charmaineleehc
     /**
      * Create a MimeMessage using the parameters provided.
      *
@@ -270,8 +273,7 @@ public class ModelManager extends ComponentManager implements Model {
      * Send an email from the user's mailbox to its recipient.
      *
      * @param service Authorized Gmail API instance.
-     * @param userId User's email address. The special value "me"
-     * can be used to indicate the authenticated user.
+     * @param userId User's email address. The special value "me"can be used to indicate the authenticated user.
      * @param emailContent Email to be sent.
      * @return The sent message
      * @throws MessagingException
@@ -284,6 +286,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         return message;
     }
+    //@@author
 
     //=========== Filtered Employee List Accessors =============================================================
 
