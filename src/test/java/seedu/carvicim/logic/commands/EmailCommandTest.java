@@ -1,14 +1,20 @@
-/*package seedu.carvicim.logic.commands;
+package seedu.carvicim.logic.commands;
 
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static seedu.carvicim.testutil.TypicalEmployees.getTypicalCarvicim;
+import static seedu.carvicim.testutil.TypicalIndexes.INDEX_FIRST_JOB;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.carvicim.commons.core.Messages;
+import seedu.carvicim.logic.commands.exceptions.CommandException;
 import seedu.carvicim.model.Model;
 import seedu.carvicim.model.ModelManager;
 import seedu.carvicim.model.UserPrefs;
+import seedu.carvicim.model.job.JobNumber;
 
 public class EmailCommandTest {
 
@@ -20,10 +26,40 @@ public class EmailCommandTest {
     }
 
     @Test
-    public void executeEmail() {
-        EmailCommand emailCommand = new EmailCommand();
+    public void execute_sendEmail_successful() throws CommandException {
+        EmailCommand emailCommand = new EmailCommand(new JobNumber("1"));
         CommandResult commandResult = emailCommand.execute();
         assertEquals(EmailCommand.MESSAGE_SUCCESS, commandResult.feedbackToUser);
     }
 
-}*/
+    @Test
+    public void execute_outOfBoundsJobNumber_failure() {
+        String outOfBoundsJobNumber = Integer.toString(model.getFilteredJobList().size() + 1);
+
+        try {
+            EmailCommand emailCommand = new EmailCommand(new JobNumber(outOfBoundsJobNumber));
+            emailCommand.execute();
+        } catch (CommandException ce) {
+            assertEquals(Messages.MESSAGE_INVALID_JOB_NUMBER, ce.getMessage());
+        }
+    }
+
+    @Test
+    public void equals() {
+        EmailCommand emailCommandJobOne = new EmailCommand(new JobNumber("1"));
+        EmailCommand emailCommandJobTwo = new EmailCommand(new JobNumber("2"));
+
+        assertTrue(emailCommandJobOne.equals(emailCommandJobOne));
+
+        EmailCommand emailCommandJobOneCopy = new EmailCommand(new JobNumber("1"));
+        assertTrue(emailCommandJobOne.equals(emailCommandJobOneCopy));
+
+        assertFalse(emailCommandJobOne.equals(1));
+
+        assertFalse(emailCommandJobOne.equals(null));
+
+        assertFalse(emailCommandJobOne.equals(emailCommandJobTwo));
+
+    }
+
+}
