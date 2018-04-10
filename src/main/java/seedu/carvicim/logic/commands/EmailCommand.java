@@ -51,15 +51,15 @@ public class EmailCommand extends Command {
         requireNonNull(model);
         ObservableList<Job> filteredJobList = model.getFilteredJobList();
 
-        if (jobNumber.asInteger() > filteredJobList.size() || jobNumber.asInteger() <= 0) {
+        if (jobNumber.asInteger() >= filteredJobList.size() || jobNumber.asInteger() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_NUMBER);
         }
 
-        UniqueEmployeeList employeesOfJob = filteredJobList.get(jobNumber.asInteger()).getAssignedEmployees();
+        UniqueEmployeeList employeesOfJob = filteredJobList.get(jobNumber.asInteger() - 1).getAssignedEmployees();
 
         try {
             for (Employee employee : employeesOfJob) {
-                Job job = filteredJobList.get(jobNumber.asInteger());
+                Job job = filteredJobList.get(jobNumber.asInteger() - 1);
 
                 String emailContent = "Hi " + employee.getName().toString() + ",\n\n"
                         + "Thank you for all your hard work thus far.\n\n"
