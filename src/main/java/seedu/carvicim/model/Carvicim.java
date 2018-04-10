@@ -134,23 +134,38 @@ public class Carvicim implements ReadOnlyCarvicim {
     public int archiveJob(DateRange dateRange) {
         int archiveJobCount = 0;
         archiveJobs = new JobList();
+        Date startDate = dateRange.getStartDate();
+        Date endDate = dateRange.getEndDate();
+        Status closed = new Status("closed");
         Iterator<Job> iterator = jobs.iterator();
         while (iterator.hasNext()) {
             Job job = iterator.next();
             Date date = job.getDate();
+            date = new Date(date.toString());
             Status status = job.getStatus();
-            Status closed = new Status("closed");
-            Date startDate = dateRange.getStartDate();
-            Date endDate = dateRange.getEndDate();
             boolean withinRange = (dateRange.compareTo(date, startDate) >= 0 && dateRange.compareTo(date, endDate) <= 0)
                     ? true
                     : false;
-            if (withinRange) {
+            boolean isClosed = (status.equals(closed))
+                    ? true
+                    : false;
+            if (withinRange && isClosed) {
                 archiveJobs.add(job);
                 archiveJobCount++;
             }
         }
         return archiveJobCount;
+    }
+
+    /**
+     * Removes archived job entries in Carvicim.
+     */
+    public void removeArchivedJob() {
+        Iterator<Job> iterator = archiveJobs.iterator();
+        while (iterator.hasNext()) {
+            Job job = iterator.next();
+            jobs.remove(job);
+        }
     }
 
     /**

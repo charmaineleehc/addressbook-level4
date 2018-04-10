@@ -24,7 +24,7 @@ Responsibilities: Model
 image::yuhongherald.jpg[width="150", align="left"]
 {empty} [https://github.com/yuhongherald[github]] [<<yuhongherald#, portfolio>>]
 
-Role: Developer _Integration, Scheduling and tracking_ +
+Role: Developer, _Testing, Integration, Scheduling and tracking_ +
 Responsibilities: Storage
 
 '''

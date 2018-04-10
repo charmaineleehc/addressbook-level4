@@ -195,12 +195,12 @@ You will see all jobs with `Apr` or `Feb` as their job detail (not case-sensitiv
 
 === Archiving job entries: `archive`
 
-To archive job entries within a specified range in CarviciM, you can use this command. +
+To archive closed job entries within a specified range in CarviciM, you can use this command. +
 Format: `archive sd/START_DATE ed/END_DATE`
 
 [NOTE]
 ====
-* Archives the job entries within the specified `START_DATE` and `END_DATE`.
+* Archives the closed job entries within the specified `START_DATE` and `END_DATE`.
 * The `START_DATE` *must be earlier than* the `END_DATE`.
 * Both dates should be in the form of *MMM DD YYYY*.
 ====

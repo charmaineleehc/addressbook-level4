@@ -46,6 +46,7 @@ import seedu.carvicim.logic.commands.ListJobCommand;
 import seedu.carvicim.logic.commands.RedoCommand;
 import seedu.carvicim.logic.commands.RemarkCommand;
 import seedu.carvicim.logic.commands.SelectEmployeeCommand;
+import seedu.carvicim.logic.commands.SortCommand;
 import seedu.carvicim.logic.commands.ThemeCommand;
 import seedu.carvicim.logic.commands.UndoCommand;
 import seedu.carvicim.logic.parser.exceptions.ParseException;
@@ -90,6 +91,11 @@ public class CarvicimParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD) instanceof SortCommand);
     }
 
     @Test
