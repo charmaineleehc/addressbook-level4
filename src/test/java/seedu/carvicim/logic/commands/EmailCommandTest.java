@@ -4,7 +4,6 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static seedu.carvicim.testutil.TypicalEmployees.getTypicalCarvicim;
-import static seedu.carvicim.testutil.TypicalIndexes.INDEX_FIRST_JOB;
 
 import org.junit.Before;
 import org.junit.Test;
