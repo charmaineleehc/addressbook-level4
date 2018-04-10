@@ -28,6 +28,7 @@ import seedu.carvicim.model.UserPrefs;
 import seedu.carvicim.model.person.Employee;
 import seedu.carvicim.model.person.TagContainsKeywordsPredicate;
 
+//@@author charmaineleehc
 /**
  * Contains integration tests (interaction with the Model) for {@code FindByTagCommand}.
  */

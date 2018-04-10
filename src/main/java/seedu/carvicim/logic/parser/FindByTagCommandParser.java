@@ -8,6 +8,7 @@ import seedu.carvicim.logic.commands.FindByTagCommand;
 import seedu.carvicim.logic.parser.exceptions.ParseException;
 import seedu.carvicim.model.person.TagContainsKeywordsPredicate;
 
+//@@author charmaineleehc
 /**
  * Parses input arguments and creates a new FindByTagCommand object
  */

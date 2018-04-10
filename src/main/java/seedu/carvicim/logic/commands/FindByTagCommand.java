@@ -2,6 +2,7 @@ package seedu.carvicim.logic.commands;
 
 import seedu.carvicim.model.person.TagContainsKeywordsPredicate;
 
+//@@author charmaineleehc
 /**
  * Finds and lists all employees in carvicim who has been tagged by any of the argument keywords.
  * Keyword matching is case sensitive.
