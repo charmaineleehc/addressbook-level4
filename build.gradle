@@ -162,7 +162,7 @@ test {
 
         if (runGuiTests) {
             test.include 'systemtests/**'
-            test.include 'seedu/carvicim/ui/**'
+            test.include 'seedu/carvicim/**'
         }
 
         if (!runGuiTests) {

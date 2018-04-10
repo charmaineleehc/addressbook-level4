@@ -30,6 +30,7 @@ import seedu.carvicim.commons.core.LogsCenter;
 import seedu.carvicim.commons.events.model.CarvicimChangedEvent;
 import seedu.carvicim.commons.events.ui.DisplayAllJobsEvent;
 import seedu.carvicim.commons.events.ui.JobDisplayPanelResetRequestEvent;
+import seedu.carvicim.commons.events.ui.JobListSwitchEvent;
 import seedu.carvicim.logic.commands.CommandWords;
 import seedu.carvicim.model.job.DateRange;
 import seedu.carvicim.model.job.Job;
@@ -39,6 +40,7 @@ import seedu.carvicim.model.person.Employee;
 import seedu.carvicim.model.person.exceptions.DuplicateEmployeeException;
 import seedu.carvicim.model.person.exceptions.EmployeeNotFoundException;
 import seedu.carvicim.storage.session.ImportSession;
+import seedu.carvicim.ui.JobListIndicator;
 
 /**
  * Represents the in-memory model of the carvicim book data.
@@ -83,6 +85,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void switchJobView() {
         isViewingImportedJobs = !isViewingImportedJobs;
+        if (isViewingImportedJobs) {
+            EventsCenter.getInstance().post(
+                    new JobListSwitchEvent(JobListIndicator.IMPORTED));
+        } else {
+            EventsCenter.getInstance().post(
+                    new JobListSwitchEvent(JobListIndicator.SAVED));
+        }
     }
 
     @Override
