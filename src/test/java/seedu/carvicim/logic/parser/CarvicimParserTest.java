@@ -37,6 +37,7 @@ import seedu.carvicim.logic.commands.ClearCommand;
 import seedu.carvicim.logic.commands.CloseJobCommand;
 import seedu.carvicim.logic.commands.DeleteEmployeeCommand;
 import seedu.carvicim.logic.commands.ExitCommand;
+import seedu.carvicim.logic.commands.FindByTagCommand;
 import seedu.carvicim.logic.commands.FindEmployeeCommand;
 import seedu.carvicim.logic.commands.HelpCommand;
 import seedu.carvicim.logic.commands.HistoryCommand;
@@ -53,6 +54,7 @@ import seedu.carvicim.model.job.VehicleNumber;
 import seedu.carvicim.model.person.Employee;
 import seedu.carvicim.model.person.NameContainsKeywordsPredicate;
 import seedu.carvicim.model.person.Person;
+import seedu.carvicim.model.person.TagContainsKeywordsPredicate;
 import seedu.carvicim.model.remark.Remark;
 import seedu.carvicim.testutil.ClientBuilder;
 import seedu.carvicim.testutil.EmployeeBuilder;
@@ -96,6 +98,14 @@ public class CarvicimParserTest {
         FindEmployeeCommand command = (FindEmployeeCommand) parser.parseCommand(
                 FindEmployeeCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindEmployeeCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findByTag() throws Exception {
+        List<String> keywords = Arrays.asList("mechanic", "technician");
+        FindByTagCommand command = (FindByTagCommand) parser.parseCommand(
+                FindByTagCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindByTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
