@@ -39,6 +39,8 @@ public class GmailAuthenticator {
 
     private Gmail gmailService;
 
+    private String authenticationUrl;
+
     static {
         try {
             httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -55,6 +57,8 @@ public class GmailAuthenticator {
      */
     public GmailAuthenticator() throws IOException {
         this.gmailService = buildGmailService();
+        this.authorizationUrl = new GoogleBrowserClientRequestUrl(clientId, redirectUrl,
+                Arrays.asList(scope1, scope2, scope3, scope4, scope5)).build();
     }
 
     /**

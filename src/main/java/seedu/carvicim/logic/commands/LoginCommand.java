@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import seedu.carvicim.commons.GmailAuthenticator;
 
-//@@author charmaineleehc-unused
+//@@author charmaineleehc
 //This command was needed intially as I wanted to allow the user to login to their own account. However, I later
 //decided that it would be better if CarviciM had its own Gmail account and the emails are sent from that account.
 /**
  * Directs user to the login page of Gmail for user to log in.
  */
-public class LoginCommand extends UndoableCommand {
+public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
 
@@ -21,8 +21,11 @@ public class LoginCommand extends UndoableCommand {
 
     private boolean isLoggedIn;
 
+    private final GmailAuthenticator gmailAuthenticator = new GmailAuthenticator();
+
     @Override
-    public CommandResult executeUndoableCommand() {
+    public CommandResult execute() {
+        String authenticationUrl = gmailAuthenticator.getAuthenticationUrl();
         try {
             new GmailAuthenticator();
         } catch (IOException ioe) {
