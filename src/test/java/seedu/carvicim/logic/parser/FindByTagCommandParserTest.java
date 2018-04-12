@@ -13,7 +13,6 @@ import seedu.carvicim.model.person.TagContainsKeywordsPredicate;
 
 //@@author charmaineleehc
 public class FindByTagCommandParserTest {
-    
     private FindByTagCommandParser parser = new FindByTagCommandParser();
 
     @Test
