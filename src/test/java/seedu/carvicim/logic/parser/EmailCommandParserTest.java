@@ -11,6 +11,7 @@ import org.junit.Test;
 import seedu.carvicim.logic.commands.EmailCommand;
 import seedu.carvicim.model.job.JobNumber;
 
+//@@author charmaineleehc
 public class EmailCommandParserTest {
 
     private EmailCommandParser parser = new EmailCommandParser();
@@ -18,8 +19,9 @@ public class EmailCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + EmailCommand.COMMAND_WORD + " " + PREFIX_JOB_NUMBER 
-                + "1", new EmailCommand(new JobNumber("1")));
+        assertParseSuccess(parser,
+                PREAMBLE_WHITESPACE + EmailCommand.COMMAND_WORD + " " + PREFIX_JOB_NUMBER + "1",
+                new EmailCommand(new JobNumber("1")));
     }
 
     @Test
@@ -35,5 +37,4 @@ public class EmailCommandParserTest {
         assertParseFailure(parser, EmailCommand.COMMAND_WORD + " " + PREFIX_JOB_NUMBER
                 + "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE));
     }
-    
 }
