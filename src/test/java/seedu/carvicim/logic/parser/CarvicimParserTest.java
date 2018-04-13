@@ -18,6 +18,7 @@ import static seedu.carvicim.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.carvicim.logic.commands.CommandTestUtil.VALID_REMARK;
 import static seedu.carvicim.logic.commands.CommandTestUtil.VALID_VEHICLE_NUMBER_A;
 import static seedu.carvicim.logic.commands.CommandTestUtil.VEHICLE_NUMBER_DESC_ONE;
+import static seedu.carvicim.logic.parser.CliSyntax.PREFIX_JOB_NUMBER;
 import static seedu.carvicim.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.carvicim.testutil.TypicalIndexes.INDEX_FIRST_THEME;
 
@@ -37,6 +38,7 @@ import seedu.carvicim.logic.commands.AnalyseCommand;
 import seedu.carvicim.logic.commands.ClearCommand;
 import seedu.carvicim.logic.commands.CloseJobCommand;
 import seedu.carvicim.logic.commands.DeleteEmployeeCommand;
+import seedu.carvicim.logic.commands.EmailCommand;
 import seedu.carvicim.logic.commands.ExitCommand;
 import seedu.carvicim.logic.commands.FindByTagCommand;
 import seedu.carvicim.logic.commands.FindEmployeeCommand;
@@ -196,6 +198,13 @@ public class CarvicimParserTest {
 
         JobNumber jobNumber = new JobNumber(VALID_JOB_NUMBER_ONE);
         assertEquals(new CloseJobCommand(jobNumber), command);
+    }
+
+    @Test
+    public void parseCommand_email() throws Exception {
+        EmailCommand command = (EmailCommand) parser.parseCommand(
+                EmailCommand.COMMAND_WORD + " " + PREFIX_JOB_NUMBER + "1");
+        assertEquals(new EmailCommand(new JobNumber("1")), command);
     }
 
     @Test

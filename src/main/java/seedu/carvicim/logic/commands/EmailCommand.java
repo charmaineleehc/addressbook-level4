@@ -84,4 +84,11 @@ public class EmailCommand extends Command {
 
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EmailCommand // instanceof handles nulls
+                && jobNumber.equals(((EmailCommand) other).jobNumber));
+    }
+
 }
