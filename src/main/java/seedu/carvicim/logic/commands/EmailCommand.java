@@ -38,7 +38,6 @@ public class EmailCommand extends Command {
     private static final String EMAIL_SUBJECT = "Job details";
 
     private final JobNumber jobNumber;
-    private final ObservableList<Job> filteredJobList = model.getFilteredJobList();
 
     /**
      * Creates an EmailCommand
@@ -49,6 +48,8 @@ public class EmailCommand extends Command {
     }
 
     public UniqueEmployeeList getListOfEmployeesOfJob() throws CommandException {
+        ObservableList<Job> filteredJobList = model.getFilteredJobList();
+
         if (jobNumber.asInteger() >= filteredJobList.size() || jobNumber.asInteger() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_NUMBER);
         }
@@ -65,6 +66,7 @@ public class EmailCommand extends Command {
      * @throws IOException
      */
     public void sendEmails(UniqueEmployeeList listOfEmployeesOfJob) throws MessagingException, IOException {
+        ObservableList<Job> filteredJobList = model.getFilteredJobList();
 
         for (Employee employee : listOfEmployeesOfJob) {
             Job job = filteredJobList.get(jobNumber.asInteger() - 1);
