@@ -38,9 +38,10 @@ public class EmailCommand extends Command {
     private static final String EMAIL_SUBJECT = "Job details";
 
     private final JobNumber jobNumber;
-    private ObservableList<Job> filteredJobList = model.getFilteredJobList();
+    private final ObservableList<Job> filteredJobList = model.getFilteredJobList();
 
     /**
+     * Creates an EmailCommand
      * @param jobNumber of the job details to be sent via email to the employee(s) in charge
      */
     public EmailCommand(JobNumber jobNumber) {
@@ -57,6 +58,12 @@ public class EmailCommand extends Command {
         return listOfEmployeesOfJob;
     }
 
+    /**
+     * Sends an email to each employee in {@code listOfEmployeesOfJob}
+     * @param listOfEmployeesOfJob
+     * @throws MessagingException
+     * @throws IOException
+     */
     public void sendEmails(UniqueEmployeeList listOfEmployeesOfJob) throws MessagingException, IOException {
 
         for (Employee employee : listOfEmployeesOfJob) {

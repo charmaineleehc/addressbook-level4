@@ -451,7 +451,7 @@ You will be redirected to the Gmail login page on your default internet browser,
 
 [NOTE]
 ====
-When you are redirected to the Gmail login page, CarviciM may sometimes appear as if it is not responding. Don't panic! Once you have successfully logged in to Gmail, CarviciM will be up and running again.
+When you are redirected to the Gmail login page, CarviciM may sometimes appear as if it is not responding. Don't panic! Once you have successfully logged in to Gmail, CarviciM will be up and running again, from exactly where you left off.
 ====
 
 When prompted to give your permission to allow CarviciM to access your Gmail account, click on `ALLOW`.
