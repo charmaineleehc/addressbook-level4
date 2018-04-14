@@ -804,6 +804,40 @@ If there is no `INDEX` present, `theme` command will return an invalid message, 
 ** Cons: Violates Law of Demeter as `ThemeCommand` has knowledge and access to `Stage`.
 // end::theme[]
 
+// tag::findbytag[]
+=== Find by tag feature
+
+==== Current Implementation
+
+When the user enters `findt` followed by some keywords, for each existing employee, the employee's tags will be concatenated to form a String, with a space in between each tag. The `stream` method of `List` class will then be used to check if any of the keywords entered by the user matches any word in the concatenated string. The code for this algorithm is shown below:
+[source,java]
+----
+public boolean test(Employee employee) {
+    Set<Tag> employeeTags = employee.getTags();
+    String tagsConcatenated = "";
+    for (Tag tag: employeeTags) {
+        tagsConcatenated = tagsConcatenated + tag.getTagName() + " ";
+    }
+    final String allTagNames = tagsConcatenated;
+
+    return keywords.stream()
+            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(allTagNames, keyword));
+}
+----
+
+This algorithm is then repeated for all existing employees.
+
+==== Design Considerations
+
+===== Aspect: Number of keyword matches
+* **Current choice:** Only at least 1 keyword match is needed for the employee to appear on the filtered list.
+** Pros: Useful for users who wish to see employees who only have at least 1 keyword as their tag in the filtered list.
+** Cons: May not be useful for users who wish to search for employees that have all the keywords as their tags.
+* _Alternative:_ All keywords have to match for the employee to appear on the filtered list.
+** Pros: Useful for users who wish to search for employees that have all the keywords as their tags.
+** Cons: May not be useful for users who wish to see employees who only have at least 1 keyword as their tag in the filtered list.
+// end::findbytag[]
+
 // tag::sort[]
 === Sort feature
 ==== Current Implementation
@@ -1166,7 +1200,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 This feature is implemented using https://developers.google.com/gmail/api/[Gmail API].
 
-When the user types the `login` command, a new GmailAuthenticator object will be created which builds an authorized Gmail client service, as seen in the diagram below.
+When the user enters the `login` command, a new GmailAuthenticator object will be created which builds an authorized Gmail client service, as seen in the diagram below.
 
 .Login sequence diagram
 image::LoginCommand_SeqDiagram.png[width="550"]

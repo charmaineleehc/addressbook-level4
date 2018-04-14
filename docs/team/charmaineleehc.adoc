@@ -8,17 +8,18 @@
 
 == Overview
 
-CarviciM is a desktop car servicing management application, morphed from AddressBook - Level 4, which is used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+CarviciM is a desktop car servicing management application, morphed from https://github.com/nus-cs2103-AY1718S2/addressbook-level4[AddressBook - Level 4], which is used for teaching Software Engineering principles in NUS School of Computing. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC initially, before the morph.
+
+CarviciM is for car servicing managers to manage the sheer amount car servicing jobs with convenience and ease. CarviciM allows car servicing managers to Carvicim to add jobs, close ongoing jobs, import large number of job entries, manage employees for job assignment, notify employees of jobs through email, and more.
 
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to send out auto-generated emails containing job details*
 ** What it does: allows the user to send out auto-generated emails about the job details to all the assigned employees of the job.
-** Justification: This feature improves the product significantly because a user can so conveniently inform their employees about the job that will be doing. The user no longer have to call or type out the emails themselves.
-** Highlights: This enhancement required an in-depth analysis of design alternatives. The implementation too was challenging as it required being able to connect to Gmail in order to send out emails to all employees assigned to the job with the specific job details as the content.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** Justification: Before this feature is implemented, a car servicing manager would typically call up employees one by one to inform them of their job details for the next day, which takes up a lot of time. With this feature, the user can so conveniently inform their employees about the job that will be doing. Moreover, the emails are auto-generated, so the user need not type out the job details themselves. This greatly speeds up administrative work done by car servicing managers.
+** Highlights: This enhancement required an in-depth analysis of design alternatives in order to pick the better choice. The implementation too was challenging as it required being able to connect to Gmail in order to send out emails to all employees assigned to the job with the specific job details as the content. Moreover, strictly adherence to coding standards was required. Adding test cases was also necessary as the code had to contain as few bugs as possible.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: added a find by tag feature which allows the user to filter the list of employees by their tags, which are usually their roles in the company.
 
 * *Code contributed*: [https://github.com/CS2103JAN2018-W09-B1/main/blob/master/collated/functional/charmaineleehc.md[Functional code]] [https://github.com/CS2103JAN2018-W09-B1/main/blob/master/collated/test/charmaineleehc.md[Test Code]]
 
