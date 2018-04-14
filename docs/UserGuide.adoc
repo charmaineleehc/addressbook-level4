@@ -10,6 +10,7 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
+:warning-caption: :warning:
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-W09-B1/main
 
@@ -25,6 +26,9 @@ This user guide shows you how to get started using the CarviciM. It shows you ho
 
 ====
 *Legend*
+
+[Warning]
+This icon represents a warning
 
 [NOTE]
 This icon represents something noteworthy
@@ -49,11 +53,11 @@ This app will not work with earlier versions of Java 8.
 .  You can download the latest `CarviciM.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your CarviciM.
 [WARNING]
-Please ensure that the no files in the directory are named comments.temp or workbook.temp as this will affect the
+Please ensure that no files in the directory are named comments.temp or workbook.temp as this will affect the
 application.
 .  Double-click the file to start the app. You should see the Graphical User Interface (GUI) as shown in the image below.
 +
-image::Ui.png[width="790"]
+image::Ui.png[width="850"]
 +
 
 You are all set to use CarviciM now! You can read the next section to find out more on how to use CarviciM.
@@ -64,29 +68,33 @@ This section will cover the basics you need to know for using the guide and the 
 
 === Various Regions In The GUI
 
-The GUI is made up of various regions as shown in the image below.
+The GUI of CarviciM is made up of the various regions as shown in the image below.
 
 image::UI_Orientation.PNG[width="900"]
 
 Command Box::
-A region on the User Interface which allows you to type in commands.
+A region on the GUI which allows you to type in commands.
 
 Job List Panel::
-A region on the User Interface where you can view the list of jobs.
+A region on the GUI where you can view the list of jobs.
 
 Employee List Panel::
-A region on the User Interface where you can view the list of employees.
+A region on the GUI where you can view the list of employees.
 
 Job Display Panel::
-A region on the User Interface which shows you the details of a selected job.
+A region on the GUI which shows you the details of a selected job.
 
 Result Display::
-A region on the User Interface which you can see the feedback to a command, entered in the command box.
+A region on the GUI which you can see the feedback to a command, entered in the command box.
 
 === Executing Your First Command In CarviciM
 
 You can execute a command by typing it in the command box and press kbd:[Enter]. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+e.g. typing *`help`* into the command box (as shown in the image below), and pressing kbd:[Enter] will open the help window.
+
+image::help-command-example.PNG[width="300"]
+_Figure 4.2.1 : Typing *`help* into the command box_
+
 Here are some example commands you can try:
 
 * *`liste`* : lists all employees' contacts
@@ -118,7 +126,7 @@ Format: `help`
 
 === Adding a job entry: `addj`
 
-To add a new job entry into CarviciM, you can use this command. +
+To add a new job entry and assign employees to the job, you can use this command. +
 Format: `addj n/NAME p/PHONE_NUMBER e/EMAIL v/VEHICLE_NUMBER w/ASSIGNED_EMPLOYEE_INDEX+`
 
 [NOTE]
@@ -131,8 +139,18 @@ Format: `addj n/NAME p/PHONE_NUMBER e/EMAIL v/VEHICLE_NUMBER w/ASSIGNED_EMPLOYEE
 Example:
 
 `addj n/John Doe p/98765432 e/johnd@example.com v/bhj123 w/3` +
-You will see "New job added: ... " in the result display. +
-The job list panel will be updated to display the newly added job.
+You will see "New job added: ... " in the result display as shown in the image below.
+
+image::addj-command-example.PNG[width="500"]
+_Figure 5.2.1 : Result display indicating that a job has been added_
+
+The job list panel will be updated to display the newly added job as seen in the image below.
+
+image::addj-job-list-panel-before.PNG[width="300"]
+_Figure 5.2.2 : Job list panel before addition of job entry_
+
+image::addj-job-list-panel-after.PNG[width="300"]
+_Figure 5.2.3 : Job list panel after addition of job entry_
 
 === Closing a job entry: `closej`
 
@@ -143,29 +161,65 @@ Example:
 
 `closej j/2` +
 This command closes the ongoing job of number 2 in CarviciM. +
-You will see "Closed Job: 2" in the result display. +
-You will see the job of number 2 have its status shown as "closed" in the job list panel.
+You will see "Closed Job: 2" in the result display as shown in the image below.
 
+image::closej-command-example.PNG[width="500"]
+_Figure 5.3.1 : Result display indicating that a job has been closed_
+
+You will also see the job of number 2 have its status shown as "closed" in the job list panel.
+
+image::closej-job-list-panel-before.PNG[width="300"]
+_Figure 5.3.2 : Job list panel before job is closed_
+
+image::closej-job-list-panel-after.PNG[width="300"]
+_Figure 5.3.3 : Job list panel after job is closed_
+
+// tag::remark[]
 === Adding remark to a job: `remark`
 
-To add remark or special note to an ongoing job entry, you can use this command.+
+To add remark or special note to an ongoing job entry, you can use this command. +
 Format: `remark j/JOB_NUMBER r/YOUR_REMARK`
 
 Example:
 
 `remark j/2 r/An urgent work that should be completed asap` +
 This command will add the remark "An urgent work that should be completed asap" to a job entry of a job number "2". +
-You will see the message "Remark Added: An urgent work that should be completed asap" shown in the result display.
+You will see the message "Remark added to job number 2: An urgent work that should be completed asap" shown in the result display (shown in the image below).
 
+image::remark-command-example.PNG[width="500"]
+_Figure 5.4.1 : Result display showing feedback for remark added_
+
+// end:remark[]
+
+=== Reassigning employees of a job: `reassign` #[Coming in V2.0]#
+
+To reassign employees belonging to a job due to manpower constraints , you can use this command. +
+Format: `reassign j/JOB_NUMBER [-/INDEX_OF_EMPLOYEE_TO_RETIRE] [+/INDEX_OF_EMPLOYEE_TO_ASSIGN]`
+
+[NOTE]
+====
+* At least one of the optional fields should be present.
+====
+
+Example:
+
+`reassign -/2 -/1 +/3 +/4` +
+This command will retire employees of index 1 and 2 from the assigned employee list belonging to the specified job, and newly assign employees of index 3 and 4 from the list of employees shown in the employee list panel.
 
 === Listing all jobs : `listj`
-To view a list of all jobs in CarviciM, you can use this command. +
+
+To view a list of all jobs in CarviciM, you can use this command to display them in the job list panel. +
 Format: `listj`
 
 [NOTE]
 ====
 * This command will show you all the jobs (closed and ongoing) in CarviciM .
 ====
+
+=== Listing all ongoing jobs : `listoj`
+
+To view a list of all *ongoing* jobs in CarviciM, you can use this command to display them in the job list panel. +
+Format: `listoj`
 
 === Locating jobs by keyword: `findj`
 
@@ -192,6 +246,29 @@ You will see all jobs with `john` as their client name (not case-sensitive), sho
 +
 `findj Apr Feb` +
 You will see all jobs with `Apr` or `Feb` as their job detail (not case-sensitive), shown in the job list panel.
+
+=== Selecting job entry by list number: `selectj`
+
+To select a specific job entry from the job list panel, you can use this command. +
+Format: `selectj j/JOB_NUMBER`
+
+[NOTE]
+====
+* This command selects the job entry with the provided `JOB_NUMBER`.
+* The `JOB_NUMBER` should be amongst the job entries in the most recent listing.
+* The `JOB_NUMBER` must be a positive integer 1, 2, 3...
+====
+
+Example:
+
+`listj` +
+You will see a list of job entries displayed in the job list panel. +
+
+`selectj j/2` +
+You will see that the respective job entry is selected in the job list panel, and the job display panel shows the full details of the job (shown in the image below).
+
+image::selectj-command-example.PNG[width="700"]
+_Figure 5.9.1 : Job display panel showing a summary of the selected job_
 
 // tag::archive[]
 === Archiving job entries: `archive`
@@ -230,7 +307,7 @@ followed by the number of jobs assigned to each employee. +
 
 === Adding an employee: `adde`
 
-To add details of a new employee into CarviciM, you can use this command. +
+To add a new employee entry into CarviciM, you can use this command. +
 Format: `adde n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Example:
@@ -240,19 +317,19 @@ The command will add the details of the new employee into CarviciM. +
 You will see "New employee added: ..." followed by details of the new employee. +
 You will see the newly added details of the employee in the employee list panel.
 
-=== Listing all employees : `liste`
+=== Listing all employee entries : `liste`
 
 To view a list of employee details in CarviciM, you can use this command. +
 Format: `liste`
 
-=== Deleting an employee : `deletee`
+=== Deleting an employee entry : `deletee`
 
 To remove the details of an employee from CarviciM, you can use this command. +
 Format: `deletee INDEX`
 
 [NOTE]
 ====
-* This command deletes the employee details at the specified `INDEX`.
+* This command deletes the employee entry at the specified `INDEX`.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* 1, 2, 3, ...
 ====
@@ -262,34 +339,34 @@ Examples:
 * Example 1: +
 +
 `liste` +
-You will see a list of employees displayed in the employee list panel.+
+You will see a list of employee entries displayed in the employee list panel.+
 +
 `deletee 2` +
-You will see an updated employee list panel which has the 2nd employee removed.
+You will see an updated employee list panel which has the 2nd employee entry removed.
 
 * Example 2: +
 +
 `finde Betsy` +
-You will see the results of the `finde` command which shows all employees with matching keyword name, in the employee list panel. +
+You will see the results of the `finde` command which shows all employee entries with matching keyword name, in the employee list panel. +
 +
 `deletee 1` +
-You will see an updated employees list panel which has the 1st employee removed.
+You will see an updated employee list panel which has the 1st employee entry removed.
 
 // tag::sort[]
-=== Sorting all employees : `sort`
+=== Sorting all employee entries : `sort`
 
-To sort the list of employees alphabetically for easy viewing, you can use this command. +
+To sort the list of employee entries alphabetically for easy viewing, you can use this command. +
 Format: `sort`
 // end::sort[]
 
-=== Selecting employees by list number: `selecte`
+=== Selecting employee entry by list number: `selecte`
 
-To select a specific employee from the employee list panel and display the assigned jobs, you can use this command. +
+To select a specific employee entry from the employee list panel and display the assigned jobs, you can use this command. +
 Format: `selecte INDEX`
 
 [NOTE]
 ====
-* This command selects the employee at the specified `INDEX`.
+* This command selects the employee entry at the specified `INDEX`.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* 1, 2, 3, ...
 ====
@@ -299,22 +376,20 @@ Examples:
 * Example 1: +
 +
 `liste` +
-You will see a list of employees displayed in the employee list panel. +
+You will see a list of employee entries displayed in the employee list panel. +
 +
-`selecte 2` +
-You will see an updated job list panel which has the jobs of the 2nd employee.
+`selecte 2`
 
 * Example 2: +
 +
 `finde Betsy` +
-You will see the results of the `finde` command which shows all employees with matching keyword name. +
+You will see the results of the `finde` command which shows all employee entries with matching keyword name. +
 +
-`selecte 1` +
-You will see an updated job list panel which has the jobs of the 1st employee.
+`selecte 1`
 
-=== Locating employees by name: `finde`
+=== Locating employee entries by name: `finde`
 
-To search for employees whose names contain any of the given keywords, you can use this command. +
+To search for employee entries whose names contain any of the given keywords, you can use this command. +
 Format: `finde KEYWORD [MORE_KEYWORDS]`
 
 [NOTE]
@@ -323,7 +398,7 @@ Format: `finde KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Employees matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* Employee entries matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 ====
 
 Examples:
@@ -331,40 +406,12 @@ Examples:
 * Example 1: +
 +
 `finde John` +
-You will see all employees with `john` as their name (not case-sensitive), shown in the employee list panel.
+You will see all employee entries with `john` as their name (not case-sensitive), shown in the employee list panel.
 
 * Example 2: +
 +
 `finde Betsy Tim John` +
-You will see all employees with `Betsy`, `Tim`, or `John` (not case-sensitive), shown in the employees list panel.
-
-// tag::set[]
-=== Changing a command word : `set`
-
-To set an easy to use word in place of a default command word, you can use this command. +
-Format: `set OLD_COMMAND_WORD NEW_COMMAND_WORD`
-
-[NOTE]
-====
-* The OLD_COMMAND_WORD can be either a default command word or one which user has set previously.
-* The NEW_COMMAND_WORD must be 1 word, with no spacing.
-* Any default words or words currently set by users are not allowed.
-====
-
-Examples:
-
-* Example 1: +
-+
-`set adde a` +
-Sets `adde` command word to `a` using default. +
-You will see "adde has been replaced with a!" in the result display.
-
-* Example 2: +
-+
-`set deletee d` +
-Sets `deletee` command word to `d` using default. +
-You will see "deletee has been replaced with d!" in the result display.
-// end::set[]
+You will see all employee entries with `Betsy`, `Tim`, or `John` (not case-sensitive), shown in the employees list panel.
 
 // tag::importexport[]
 === Importing jobs from an excel file
@@ -474,7 +521,7 @@ Example:
 `rejectAll` +
 Rejects all remaining job entries and clears the imported list.
 
-==== Writing comments to your reviews #Coming in V1.5#
+==== Writing comments to your reviews
 
 While accepting or rejecting changes, you can enter your comments behind the command.
 
@@ -513,6 +560,34 @@ CarviciM autosaves your comments to an excel file with -comments.xls or -comment
 in the same directory.
 // end::importexport[]
 
+// tag::set[]
+=== Changing a command word : `set`
+
+To set an easy to use word in place of a default command word, you can use this command. +
+Format: `set OLD_COMMAND_WORD NEW_COMMAND_WORD`
+
+[NOTE]
+====
+* The OLD_COMMAND_WORD can be either a default command word or one which user has set previously.
+* The NEW_COMMAND_WORD must be 1 word, with no spacing.
+* Any default words or words currently set by users are not allowed.
+====
+
+Examples:
+
+* Example 1: +
++
+`set adde a` +
+Sets `adde` command word to `a` using default. +
+You will see "adde has been replaced with a!" in the result display.
+
+* Example 2: +
++
+`set deletee d` +
+Sets `deletee` command word to `d` using default. +
+You will see "deletee has been replaced with d!" in the result display.
+// end::set[]
+
 // tag::theme[]
 === Setting a theme : `theme`
 
@@ -525,6 +600,20 @@ Format: `theme INDEX`
 * The index refers to the index number shown in the most recent listing
 * The index *must be a positive integer* 1, 2, 3,...
 ====
+
+You will be able to select from these 3 themes:
+
+image::mauve-theme.PNG[width="800"]
+
+_Figure 5.20.1 : Mauve Theme_
+
+image::dark-theme.PNG[width="800"]
+
+_Figure 5.20.2 : Dark Theme_
+
+image::light-theme.PNG[width="800"]
+
+_Figure 5.20.3 : Light Theme_
 
 Example:
 
@@ -593,13 +682,13 @@ Examples:
 * Example 1: +
 +
 `deletee 1` +
-You will see that the first employee is removed from the employee list panel. +
+You will see that the first employee entry is removed from the employee list panel. +
 +
 `undo` (reverses the `deletee 1` command) +
-You will see that the deleted employee is added back into the employee list panel. +
+You will see that the deleted employee entry is added back into the employee list panel. +
 +
 `redo` (reapplies the `deletee 1` command) +
-You will see that the same employee is removed from the employee list panel again.
+You will see that the same employee entry is removed from the employee list panel again.
 
 * Example 2: +
 +
@@ -607,10 +696,10 @@ You will see that the same employee is removed from the employee list panel agai
 You will see that the job number 1 has its status changed to "closed" in the job list panel. +
 +
 `deletee 1` +
-You will see that the first employee is removed from the employee list panel. +
+You will see that the first employee entry is removed from the employee list panel. +
 +
 `undo` (reverses the `deletee 1` command) +
-You will see that the deleted employee is added back into the employee list panel. +
+You will see that the deleted employee entry is added back into the employee list panel. +
 +
 `undo` (reverses the `closej j/1` command) +
 You will see that the closed job number 1 has it status changed to "ongoing" in the job list panel. +
@@ -619,7 +708,7 @@ You will see that the closed job number 1 has it status changed to "ongoing" in 
 You will see that the job number 1 has its status changed back to "closed" again, in the job list panel. +
 +
 `redo` (reapplies the `deletee 1` command) +
-You will see that the same employee is removed from the employee list panel.
+You will see that the same employee entry is removed from the employee list panel.
 // end::undoredo[]
 
 === Clearing the application : `clear`
@@ -629,7 +718,8 @@ Format: `clear`
 
 [NOTE]
 ====
-`clear` command will remove all job entries and employees in CarviciM. Job number will start from 1.
+* `clear` command will remove all job entries and employee entries in CarviciM
+* Job number will start from 1.
 ====
 
 === Exiting the program : `exit`
@@ -646,66 +736,82 @@ For your convenience, authorization information will be stored on your computer'
 
 === Email assigned employees belonging to a job : `email`
 
-*V1.4 (current):*
-You can use this command to send an email to a dummy email address. +
-Format: `email`
-
-*V1.5 (future):*
-You can use this command to send a notice email to all assigned employees of a job. +
+To send a notice email to all assigned employees of a job, you can use this command. +
 Format: `email JOB_NUMBER`
-
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
-== Command Summary
+*Q*: Can i use this application without internet connection? +
+*A*: You will be able to use most commands in CarviciM except for the `email` command.
 
-* *Add Job* `addj n/NAME p/PHONE_NUMBER e/EMAIL v/VEHICLE_NUMBER w/ASSIGNED_EMPLOYEE_INDEX+` +
-e.g. `addj n/James Ho p/22224444 e/jamesho@example.com v/saa213 w/22`
-* *Close Job* `closej j/JOB_NUMBER` +
-e.g. `closej j/1232`
-* *Archive job entries* `archive sd/START_DATE ed/END_DATE` +
-e.g. `archive sd/Mar 25 2018 ed/Apr 03 2018`
-* *Analyse job entries* `analyse` +
-e.g. `analyse`
-* *Add Employee* `adde n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...` +
-e.g. `adde n/James Ho p/22224444 e/jamesho@example.com t/mechanic`
-* *Delete Employee* : `deletee INDEX` +
-e.g. `deletee 3`
-* *Select Employee* : `selecte INDEX` +
-e.g. `selecte 1`
-* *Find Employees* : `finde KEYWORD [MORE_KEYWORDS]` +
-e.g. `finde James Jake`
-* *List Employee* : `liste`
-* *Sort Employee* : `sort`
-* *Import excel file* : `import` +
-e.g. `import excel.xls`
-* *Accept imported job* : `accept NUMBER` +
-e.g. `accept 1`
-* *Reject imported job* : `reject NUMBER` +
-e.g. `reject 1`
-* *Accept all imported job* : `acceptAll` +
-e.g. `acceptAll`
-* *Reject all imported job* : `rejectAll` +
-e.g. `rejectAll`
-* *Save comments on job imports* : `save` +
-e.g. `save`
-* *Help* : `help`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
-* *Email Assigned Employees Of A Job* : `email JOB_NUMBER` +
-e.g. `email 123`
-* *Change Command Word* : `set` +
-e.g. `set adde a`
-* *Theme* : `theme INDEX` +
-e.g. `theme 1`
-* *Clear entire CarviciM* : `clear`
+== Command Summary
+This section contains a summary of all the commands that you can use in CarviciM.
+
+[width="59%",cols="22%,<23%,<30%",options="header",]
+
+|=======================================================================
+|Description |Command Format |Example
+
+|*Add Job* | `addj n/NAME p/PHONE_NUMBER e/EMAIL v/VEHICLE_NUMBER w/ASSIGNED_EMPLOYEE_INDEX+` + |`addj n/James Ho p/22224444 e/jamesho@example.com v/saa213 w/22`
+
+|*Close Job* |`closej j/JOB_NUMBER` |`closej j/12`
+
+|*List Ongoing Jobs* |`listoj` |
+
+|*List All Jobs* |`listj` |
+
+|*Find Jobs* |`findj KEYWORD [MORE_KEYWORDS]` |`findj Apr Tom`
+
+|*Select A Job Entry* |`selectj j/JOB_NUMBER` |`selectj j/3`
+
+|*Archive Job Entries* |`archive sd/START_DATE ed/END_DATE |`archive sd/Mar 25 2018 ed/Apr 03 2018`
+
+|*Analyse Job Entries* |`analyse` |
+
+|*Add Employee Entry* |`adde n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...` |`adde n/James Ho p/22224444 e/jamesho@example.com t/mechanic`
+
+|*Delete Employee Entry* |`deletee INDEX` |`deletee 3`
+
+|*Find Employees Entries* |`finde KEYWORD [MORE_KEYWORDS]` |`finde James Jake`
+
+|*Select Employee* |`selecte INDEX` |`selecte 1`
+
+|*List Employee Entries* |`liste` |
+
+|*Sort Employee* |`sort` |
+
+|*Import Excel File* |`import` |`import excel.xls`
+
+|*Accept Imported Job* |`accept NUMBER` |`accept 1`
+
+|*Reject Imported Job* |`reject NUMBER` |`reject 1`
+
+|*Accept All Imported Jobs* |`acceptAll` |
+
+|*Reject All Imported Jobs* |`rejectAll` |
+
+|*Save Comments On Job Imports* |`save` |
+
+|*Viewing Help*| `help`|
+
+|*History* |`history` |
+
+|*Undo A Command* |`undo` |
+
+|*Redo A Command* |`redo` |
+
+|*Email Assigned Employees Of A Job* |`email JOB_NUMBER` |`email 123`
+
+|*Change Command Word* |`set` |`set adde a`
+
+|*Apply Theme* |`theme INDEX` |`theme 1`
+
+|*Clear Entire CarviciM* |`clear` |
+
+|*Exit The Application* |`exit` |
+
+|=======================================================================
 
