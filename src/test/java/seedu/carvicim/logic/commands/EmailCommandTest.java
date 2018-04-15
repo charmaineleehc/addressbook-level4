@@ -29,13 +29,6 @@ public class EmailCommandTest {
     }
 
     @Test
-    public void execute_sendEmail_successful() throws NullPointerException {
-        EmailCommand emailCommand = new EmailCommand(new JobNumber("1"));
-        emailCommand.setData(model, new CommandHistory(), new UndoRedoStack());
-        assertCommandSuccess(emailCommand, model, emailCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
     public void execute_outOfBoundsJobNumber_failure() {
         String outOfBoundsJobNumber = Integer.toString(model.getFilteredJobList().size() + 1);
         EmailCommand emailCommand = new EmailCommand(new JobNumber(outOfBoundsJobNumber));
