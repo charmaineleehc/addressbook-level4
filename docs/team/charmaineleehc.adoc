@@ -29,7 +29,7 @@ CarviciM is for car servicing managers to manage the sheer amount car servicing 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed release `v1.5rc` on GitHub
 *** Used GitHub issues tracker to keep track of issues that arise throughout the development process
 ** Documentation:
 *** Updated User Guide with the features implemented (see below, under Contributions to the User Guide).
