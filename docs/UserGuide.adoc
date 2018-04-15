@@ -476,12 +476,12 @@ You will be redirected to the Gmail login page on your default internet browser,
 
 [NOTE]
 ====
-When you are redirected to the Gmail login page, CarviciM may sometimes appear as if it is not responding. Don't panic! Once you have successfully logged in to Gmail, CarviciM will be up and running again, from exactly where you left off.
+When you are redirected to the Gmail login page, CarviciM may (although unlikely to happen) appear as if it is not responding. Don't panic! Once you have successfully logged in to Gmail, CarviciM will be up and running again, from exactly where you left off.
 ====
 
 When prompted to give your permission to allow CarviciM to access your Gmail account, click on `ALLOW`.
 
-[NOTE]
+[WARNING]
 ====
 Please do NOT click on `CANCEL`. Be assured that CarviciM will only use your account to send out emails to your employees.
 ====
@@ -492,7 +492,8 @@ For your convenience, your authorization information will be stored on your comp
 
 [NOTE]
 ====
-Before using this command, ensure that you are connected to the internet.
+* Before using this command, ensure that you are connected to the internet.
+* You will need to `login` first before you can send out emails. If you have yet to `login`, the `email` command will first redirect you to the Gmail login page on your default internet browser before sending the emails. Please see Section 5.18 above on how to `login`.
 ====
 
 To send auto-generated emails containing the job details from your Gmail account to all assigned employees of the job, use this command as follows: +
@@ -500,8 +501,13 @@ Format: `email j/JOB_NUMBER`
 
 [NOTE]
 ====
-You will need to `login` first before you can send out emails. If you have yet to `login`, the `email` command will first redirect you to the Gmail login page on your default internet browser before sending the emails. Please see Section 5.18 above on how to `login`.
+* The `JOB_NUMBER` *must be a positive integer* 1, 2, 3, ...
 ====
+
+Take a look at the image below for a sample of the contents of the emails that will be sent when you use this command.
+
+.Email sequence diagram
+image::Email_example.PNG[width="550"]
 
 Example:
 
