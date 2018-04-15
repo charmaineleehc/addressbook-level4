@@ -127,6 +127,7 @@ public class CarvicimParserTest {
         assertEquals(new FindEmployeeCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
+    //@@author charmaineleehc
     @Test
     public void parseCommand_findByTag() throws Exception {
         List<String> keywords = Arrays.asList("mechanic", "technician");
@@ -134,6 +135,7 @@ public class CarvicimParserTest {
                 FindByTagCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindByTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
+    //@@author
 
     @Test
     public void parseCommand_help() throws Exception {
@@ -227,12 +229,14 @@ public class CarvicimParserTest {
         assertEquals(new CloseJobCommand(jobNumber), command);
     }
 
+    //@@author charmaineleehc
     @Test
     public void parseCommand_email() throws Exception {
         EmailCommand command = (EmailCommand) parser.parseCommand(
                 EmailCommand.COMMAND_WORD + " " + PREFIX_JOB_NUMBER + "1");
         assertEquals(new EmailCommand(new JobNumber("1")), command);
     }
+    //@@author
 
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {

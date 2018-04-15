@@ -3,7 +3,6 @@ package seedu.carvicim.logic.commands;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static seedu.carvicim.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.carvicim.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.carvicim.testutil.TypicalEmployees.getTypicalCarvicimWithJobs;
 
 import org.junit.Before;
