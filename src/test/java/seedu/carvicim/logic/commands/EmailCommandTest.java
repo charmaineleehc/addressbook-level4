@@ -17,15 +17,14 @@ import seedu.carvicim.model.ModelManager;
 import seedu.carvicim.model.UserPrefs;
 import seedu.carvicim.model.job.JobNumber;
 
+//@@author charmaineleehc
 public class EmailCommandTest {
 
     private Model model;
-    private Model expectedModel;
 
     @Before
     public void setUp() {
         this.model = new ModelManager(getTypicalCarvicimWithJobs(), new UserPrefs());
-        this.expectedModel = new ModelManager(getTypicalCarvicimWithJobs(), new UserPrefs());
     }
 
     @Test
