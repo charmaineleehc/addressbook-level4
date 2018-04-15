@@ -1205,7 +1205,7 @@ This feature is implemented using https://developers.google.com/gmail/api/[Gmail
 When the user enters the `login` command, a new GmailAuthenticator object will be created which builds an authorized Gmail client service, as seen in the diagram below.
 
 .Login sequence diagram
-image::LoginCommand_SeqDiagram.png[width="550"]
+image::LoginCommand_SeqDiagram.PNG[width="550"]
 
 In the `authorize` method, a `GoogleAuthorizationCodeFlow` object is created to build the authorization code flow and trigger user authorization request. It then manages and persists user `Credential` by saving it in the file path `./src/main/resources/.credentials/carvicim-gmail`. For more details, look at the the code snippet below.
 
@@ -1238,7 +1238,7 @@ This feature is implemented using https://developers.google.com/gmail/api/[Gmail
 A general overview of how this feature is implemented is shown in the sequence diagram below.
 
 .Email sequence diagram
-image::EmailCommand_SeqDiagram.png[width="550"]
+image::EmailCommand_SeqDiagram.PNG[width="550"]
 
 To explain the sequence of events in greater detail, when the user enters the `email j/JOB_NUMBER` command, a `UniqueEmployeeList` of `JOB_NUMBER` job is obtained from the `Job` object. Using a `for` loop, an email is sent to each employee in the `UniqueEmployeeList`. To craft an email, an empty `Properties` list is created, which is used to create an email `Session`. A `MimeMessage`, a class in the `javax.mail.internet` package is created using that `Session`. The body of the `MimeMessage` contains details extracted from the particular `Job`, and is then encoded using https://en.wikipedia.org/wiki/Base64[base64url] and repackaged into a `Message` by setting the value of the `raw` property of the `Message` to the encoded `MimeMessage`. Finally, this `Message` is sent by making a call to `messages.send`.
 
