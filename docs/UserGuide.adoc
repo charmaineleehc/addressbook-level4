@@ -885,6 +885,8 @@ This section contains a summary of all the commands that you can use in CarviciM
 |=======================================================================
 |Description |Command Format |Example
 
+3+| *_Job Management Features_*
+
 |*Add Job* | `addj n/NAME p/PHONE_NUMBER e/EMAIL v/VEHICLE_NUMBER w/ASSIGNED_EMPLOYEE_INDEX+` + |`addj n/James Ho p/22224444 e/jamesho@example.com v/saa213 w/22`
 
 |*Close Job* |`closej j/JOB_NUMBER` |`closej j/12`
@@ -901,6 +903,8 @@ This section contains a summary of all the commands that you can use in CarviciM
 
 |*Analyse Job Entries* |`analyse` |
 
+3+| *_Employee Entries Management Features_*
+
 |*Add Employee Entry* |`adde n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...` |`adde n/James Ho p/22224444 e/jamesho@example.com t/mechanic`
 
 |*Delete Employee Entry* |`deletee INDEX` |`deletee 3`
@@ -913,6 +917,8 @@ This section contains a summary of all the commands that you can use in CarviciM
 
 |*Sort Employee* |`sort` |
 
+3+| *_Import Features_*
+
 |*Import Excel File* |`import` |`import excel.xls`
 
 |*Accept Imported Job* |`accept NUMBER` |`accept 1`
@@ -924,6 +930,8 @@ This section contains a summary of all the commands that you can use in CarviciM
 |*Reject All Imported Jobs* |`rejectAll` |
 
 |*Save Comments On Job Imports* |`save` |
+
+3+| *_Other Features_*
 
 |*Viewing Help*| `help`|
 
