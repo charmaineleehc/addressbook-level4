@@ -833,7 +833,7 @@ public boolean test(Employee employee) {
 }
 ----
 
-This algorithm is then repeated for all existing employees.
+This algorithm is then repeated for all existing employees to get the filtered list.
 
 ==== Design Considerations
 
@@ -1246,7 +1246,22 @@ A general overview of how this feature is implemented is shown in the sequence d
 .Email sequence diagram
 image::EmailCommand_SeqDiagram.PNG[width="550"]
 
-To explain the sequence of events in greater detail, when the user enters the `email j/JOB_NUMBER` command, a `UniqueEmployeeList` of `JOB_NUMBER` job is obtained from the `Job` object. Using a `for` loop, an email is sent to each employee in the `UniqueEmployeeList`. To craft an email, an empty `Properties` list is created, which is used to create an email `Session`. A `MimeMessage`, a class in the `javax.mail.internet` package is created using that `Session`. The body of the `MimeMessage` contains details extracted from the particular `Job`, and is then encoded using https://en.wikipedia.org/wiki/Base64[base64url] and repackaged into a `Message` by setting the value of the `raw` property of the `Message` to the encoded `MimeMessage`. Finally, this `Message` is sent by making a call to `messages.send`.
+To explain the sequence of events in greater detail, when the user enters the `email j/JOB_NUMBER` command, a `UniqueEmployeeList` of `JOB_NUMBER` job is obtained from the `Job` object. Using a `for` loop, an email is sent to each employee in the `UniqueEmployeeList`.
+
+To craft an email, an empty `Properties` list is created, which is used to create an email `Session`. A `MimeMessage`, a class in the `javax.mail.internet` package is created using that `Session`. The body of the `MimeMessage` contains details extracted from the particular `Job`, and is then encoded using https://en.wikipedia.org/wiki/Base64[base64url] and repackaged into a `Message` by setting the value of the `raw` property of the `Message` to the encoded `MimeMessage`. How the repacking is done is shown in the code snippet below:
+[source,java]
+----
+public static Message createMessageWithEmail(MimeMessage emailContent) throws MessagingException, IOException {
+    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+    emailContent.writeTo(buffer);
+    byte[] bytes = buffer.toByteArray();
+    String encodedEmail = Base64.encodeBase64URLSafeString(bytes);
+    Message message = new Message();
+    message.setRaw(encodedEmail);
+    return message;
+}
+----
+Finally, this `Message` is sent by making a call to `messages.send`.
 
 ==== Design Considerations
 
@@ -1903,6 +1918,14 @@ Priorities::
 |`* * *` |user |add remarks to ongoing job entry |take note of details that are specific to the job
 
 |`* * *` |user |import job entries |add multiple job entries at once
+
+|`* *` |user |login to Gmail |email employees about the assigned job details
+
+|`* *` |user |send emails to employees about the assigned job details |inform my employees of which jobs they are in charge of.
+
+|`* *` |busy user |send auto-generated emails to employees about the assigned job details |reduce the amount of time spent informing my employees of which jobs they are in charge of.
+
+|`* *` |user |find employees by their tags |find the employee with the matching skills for the job.
 
 |`* *` |user |sort by employees' name |sort employee list alphabetically
 

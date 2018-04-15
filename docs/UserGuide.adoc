@@ -468,14 +468,14 @@ You will see all employee entries with the tags `technican` and/or `mechanic`(no
 Before using this command, ensure that you are connected to the internet.
 ====
 
-You will need to login to Gmail before you can use the `email` feature to send out emails to your employees (see Section 5.19 below). To login to Gmail, use the `login` command as follows: +
+You will need to login to Gmail before you can use the `email` feature to send out emails to your employees (see Section 5.20 below). To login to Gmail, use the `login` command as follows: +
 Format: `login`
 
 You will be redirected to the Gmail login page on your default internet browser, where you can then proceed to login.
 
 [NOTE]
 ====
-When you are redirected to the Gmail login page, CarviciM may (although unlikely to happen) appear as if it is not responding. Don't panic! Once you have successfully logged in to Gmail, CarviciM will be up and running again, from exactly where you left off.
+When you are redirected to the Gmail login page, CarviciM may (although unlikely to happen) appear as if it is not responding. If so, don't panic! Once you have successfully logged in to Gmail, CarviciM will be up and running again, from exactly where you left off.
 ====
 
 When prompted to give your permission to allow CarviciM to access your Gmail account, click on `ALLOW`.
@@ -505,8 +505,8 @@ Format: `email j/JOB_NUMBER`
 
 Take a look at the image below for a sample of the contents of the emails that will be sent when you use this command.
 
-.Email sequence diagram
 image::Email_example.PNG[width="550"]
+_Figure 5.20.1 : Sample of auto-generated email content_
 
 Example:
 
