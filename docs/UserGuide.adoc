@@ -120,7 +120,7 @@ This section will explain to you how you can use the features of CarviciM.
 
 === Viewing help : `help`
 
-To find out more on using CarviciM, you can use this command to open the help menu. +
+To find out more on using CarviciM, you can use this command to open the help menu: +
 Format: `help`
 
 // tag::addjob[]
@@ -210,7 +210,7 @@ This command will retire employees of index 1 and 2 from the assigned employee l
 
 === Listing all jobs : `listj`
 
-To view a list of all jobs in CarviciM, you can use this command to display them in the job list panel. +
+To view a list of all jobs in CarviciM, you can use this command to display them in the job list panel: +
 Format: `listj`
 
 [NOTE]
@@ -220,7 +220,7 @@ Format: `listj`
 
 === Listing all ongoing jobs : `listoj`
 
-To view a list of all *ongoing* jobs in CarviciM, you can use this command to display them in the job list panel. +
+To view a list of all *ongoing* jobs in CarviciM, you can use this command to display them in the job list panel: +
 Format: `listoj`
 
 === Locating jobs by keyword: `findj`
@@ -728,7 +728,7 @@ You will see the theme of the application set as the selected one.
 
 === Listing entered commands : `history`
 
-To find out what commands that you have executed recently, you can use this command to list a history of executed commands in reverse chronological order. +
+To find out what commands that you have executed recently, use this command to list a history of executed commands in reverse chronological order: +
 Format: `history`
 
 [NOTE]
@@ -739,7 +739,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-To reverse an undoable command that was executed by mistake, you can use this command to restore CarviciM to the state before the execution of that command. +
+Nobody's perfect. To reverse an undoable command that was executed by mistake, use this command to restore CarviciM to the state before the execution of that command: +
 Format: `undo`
 
 [NOTE]
@@ -814,7 +814,7 @@ You will see that the same employee entry is removed from the employee list pane
 
 === Clearing the application : `clear`
 
-To have an empty CarviciM app, you can use this command to clear everything in the app. +
+To have an empty CarviciM app, use this command to clear everything in the app: +
 Format: `clear`
 
 [NOTE]
@@ -838,8 +838,17 @@ There is no need to save manually.
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
-*Q*: Can i use this application without internet connection? +
-*A*: You will be able to use most commands in CarviciM except for the `email` command.
+*Q*: Can I use this application without internet connection? +
+*A*: You will be able to use most commands in CarviciM except for the `login` and `email` command.
+
+*Q*: Why can't I use my mouse?
+*A*: CarviciM is targeted at users who can type fast. The commands can be executed faster than with a mouse if you are fast typer.
+
+*Q*: I want to be able to view an employee's schedule on a calendar so that I can better allocate jobs. How can I do that?
+*A*: We hear you. We are currently working on this feature, and it will be one of the new features in CarviciM 2.0. Do watch out for the update!
+
+*Q*: The problem that I am facing is not listed here. What can I do?
+*A*: Don't worry, simply drop us an email at _carvicim@gmail.com_ and we will respond to you shortly.
 
 == Command Summary
 This section contains a summary of all the commands that you can use in CarviciM.
