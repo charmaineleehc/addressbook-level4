@@ -32,7 +32,7 @@ public class EmailCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_JOB_NUMBER + "12 ";
 
-    public static final String MESSAGE_SUCCESS = "The email has been successfully sent to your employee!";
+    public static final String MESSAGE_SUCCESS = "The emails have been successfully sent to your employees!";
 
     private static final String EMAIL_SENDER = "me";
     private static final String EMAIL_SUBJECT = "Job details";
