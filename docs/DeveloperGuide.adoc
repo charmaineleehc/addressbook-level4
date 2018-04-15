@@ -78,9 +78,9 @@ You can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document to config
 
 ==== Updating documentation to match your fork
 
-After forking the repo, links in the documentation will still point to the `se-edu/addressbook-level4` repo.
+After forking the repo, links in the documentation will still point to the `se-edu/carvicim` repo.
 
-If you plan to develop this as a separate product (i.e. instead of contributing to the `se-edu/addressbook-level4`) , you should replace the URL in the variable `repoURL` in `DeveloperGuide.adoc` and `UserGuide.adoc` with the URL of your fork.
+If you plan to develop this as a separate product (i.e. instead of contributing to the `se-edu/carvicim`) , you should replace the URL in the variable `repoURL` in `DeveloperGuide.adoc` and `UserGuide.adoc` with the URL of your fork.
 
 ==== Setting up CI
 
@@ -165,18 +165,18 @@ image::LogicClassDiagram.png[width="800"]
 
 The _Sequence Diagram_ below (figure 3) shows how the components interact for the scenario where the user issues the command `delete 1`.
 
-.Component interactions for `delete 1` command (part 1)
+.Component interactions for `deletee 1` command (part 1)
 image::SDforDeletePerson.png[width="800"]
 [none]
 
 ====
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `CarvicimChangedEvent` when the Carvicim data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 ====
 
 The diagram below (figure 4) shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
-.Component interactions for `delete 1` command (part 2)
+.Component interactions for `deletee 1` command (part 2)
 image::SDforDeletePersonEventHandling.png[width="800"]
 [none]
 
@@ -195,7 +195,7 @@ image::UiClassDiagram.png[width="800"]
 
 <<api, *API*>> : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class (figure 5).
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `JobListPanel`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class (figure 5).
 
 The `UI` component uses https://en.wikipedia.org/wiki/JavaFX[JavaFx] UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -246,8 +246,8 @@ image::ModelClassDiagram.png[width="800"]
 The `Model` (figure 9),
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Carvicim data.
+* exposes an unmodifiable `ObservableList<Employee>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [[Design-Storage]]
@@ -263,7 +263,8 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component (figure 10),
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Carvicim data in xml format and read it back.
+* can save the ArchiveJob data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -573,6 +574,7 @@ image::RemarkCommand_execute_SeqDiag.png[width="400"]
 * **Current choice:** Perform check in the `preprocessUndoableCommand` method in `RemarkCommand`, by going through the list of jobs.
 ** Pros: Does not introduce more coupling.
 ** Cons: May take some time if job list has many entries.
+// end::remark[]
 
 // tag::set[]
 === Set command feature
@@ -1886,27 +1888,33 @@ Priorities::
 
 |`* * *` |user |view all employees |decide which employee to assign a job
 
-|`* *` |user |sort by employees' name |sort employee list alphabetically
-
 |`* * *` |user |add a new job entry |manage job entries
 
-|`* * *` |user |close an ongoing job entry |remove completed job and add it to jobs history
+|`* * *` |user |close an ongoing job entry |indicate that a job is completed
 
 |`* * *` |user |find a job entry by its assigned job id |locate details of a job without having to go through the list of ongoing jobs
 
-|`* *` |user |find job entries by the assigned employee's name |locate details of all jobs that are handled by an employee without having to go through the lists of jobs
-
-|`* *` |user |find job entries by client's name |locate details of all jobs belonging to a client without having to go through the lists of jobs
-
-|`* *` |user |find job entries by car number |locate details of all jobs related to a car number without having to go through the lists of jobs
-
 |`* * *` |user |add remarks to ongoing job entry |take note of details that are specific to the job
 
-|`**` |user |archive job entries |extract job entries within the selected range for archiving
-
-|`**` |user |analyse job entries |keep track of employees' performance
-
 |`* * *` |user |import job entries |add multiple job entries at once
+
+|`* *` |user |sort by employees' name |sort employee list alphabetically
+
+|`* *` |user |find job entries by the assigned employee's name |locate details of all jobs that are handled by an employee without having to go through the list of jobs
+
+|`* *` |user |find job entries by client's name |locate details of all jobs belonging to a client without having to go through the list of jobs
+
+|`* *` |user |find job entries by car number |locate details of all jobs related to a car number without having to go through the list of jobs
+
+|`* *` |user |archive job entries |extract job entries within the selected range for archiving
+
+|`* *` |user |analyse job entries |keep track of employees' workload
+
+|`* *` |user |change the colour label of job status |easily differentiate between the job statuses
+
+|`* *` |user who likes customization |change the theme of the application |customize the theme to my preference
+
+|`* *` |user who likes customization |change the command words of the application |improve ease of use
 
 |`* *` |user |accept and reject imported changes |have control when over bulk imports
 
@@ -1918,12 +1926,6 @@ Priorities::
 
 |`*` |user |export completed jobs to other formats |print out all the completed job entries and view it with a better program
 
-|`* *` |user |change the colour label of job status |easily differentiate between the job statuses
-
-|`* *` |user who likes customization |change the theme of the application |customize the theme to my preference
-
-|`* *` |user who likes customization |change the command words of the application |improve ease of use
-
 |=======================================================================
 
 _{More to be added}_
@@ -1932,50 +1934,6 @@ _{More to be added}_
 == Use Cases
 
 (For all use cases below, the *System* is the `CarviciM` and the *Actor* is the `user`, unless specified otherwise)
-
-[discrete]
-=== Use case: Add remarks to an ongoing job entry
-
-*MSS*
-
-1.  User selects a job entry.
-2.  CarviciM shows logged remarks in the job.
-3.  User requests to log a remark.
-4.  CarviciM reflects the added remark at end of log.
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. The remarks list is empty.
-+
-[none]
-** 2a1. CarviciM shows an empty list.
-+
-Use case resumes at step 3.
-
-* 3a. The given remark is empty.
-+
-Use case resumes at step 3.
-
-[discrete]
-=== Use case: Tab auto-complete commands
-
-*MSS*
-
-1.  User types incomplete argument in command.
-2.  User presses tab key.
-3.  CarviciM completes the command.
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. Argument has more than one possible auto-complete.
-+
-Use case resumes at step 1.
 
 [discrete]
 === Use case: Add employee
@@ -2022,6 +1980,16 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+[none]
+* 3b. The given employee is assigned to an ongoing job.
++
+[none]
+** 3b1. CarviciM shows an error message.
++
+Use case resumes at step 3.
++
+Use case ends.
+
 [discrete]
 === Use case: Find an employee by name
 
@@ -2046,34 +2014,6 @@ Use case ends.
 
 1.  User request to sort employee list.
 2.  CarviciM sorts employee list alphabetically according to their names.
-+
-Use case ends.
-
-[discrete]
-=== Use case: Customize the colour label of job status
-
-*MSS*
-
-1.  User specifies color label of a job status.
-2.  CarviciM updates the label colors displayed.
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. The label provided is not valid.
-+
-[none]
-** 1a1. CarviciM shows an error message.
-+
-Use case ends.
-
-[none]
-* 1b. The color provided is not valid.
-+
-[none]
-** 1b1. CarviciM shows an error message.
 +
 Use case ends.
 
@@ -2115,6 +2055,32 @@ Use case ends.
 Use case resumes at step 3.
 +
 Use case ends.
+
+[discrete]
+=== Use case: Add remarks to an ongoing job entry
+
+*MSS*
+
+1.  User selects a job entry.
+2.  CarviciM shows logged remarks in the job.
+3.  User requests to log a remark.
+4.  CarviciM reflects the added remark at end of log.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The remarks list is empty.
++
+[none]
+** 2a1. CarviciM shows an empty list.
++
+Use case resumes at step 3.
+
+* 3a. The given remark is empty.
++
+Use case resumes at step 3.
 
 [discrete]
 === Use case: Close job entry
@@ -2211,6 +2177,97 @@ Use case ends.
 Use case resumes at step 5.
 
 [discrete]
+=== Use case: Archiving of job entries
+
+*MSS*
+
+1.  User specifies the date range for archiving.
+2.  CarviciM extracts the closed job entries within the selected range and saves them to a new xml file.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given date format is invalid.
+[none]
+** 1a1. CarviciM shows an error message.
++
+Use case ends.
+
+[none]
+* 1b. The given date range is invalid.
+[none]
+** 1b1. CarviciM shows an error message.
+
++
+Use case ends.
+
+[none]
+* 1c. No job entries found within selected date range.
+[none]
+** 1c1. CarviciM shows an error message.
+
++
+Use case ends.
+
+[discrete]
+=== Use case: Analysing of job entries
+
+*MSS*
+
+1.  User requests to analyse the job entries.
+2.  CarviciM analyses the job entries within the current month and provides a summary of the job entries.
++
+Use case ends.
+
+[discrete]
+=== Use case: Tab auto-complete commands
+
+*MSS*
+
+1.  User types incomplete argument in command.
+2.  User presses tab key.
+3.  CarviciM completes the command.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Argument has more than one possible auto-complete.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Customize the colour label of job status
+
+*MSS*
+
+1.  User specifies color label of a job status.
+2.  CarviciM updates the label colors displayed.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The label provided is not valid.
++
+[none]
+** 1a1. CarviciM shows an error message.
++
+Use case ends.
+
+[none]
+* 1b. The color provided is not valid.
++
+[none]
+** 1b1. CarviciM shows an error message.
++
+Use case ends.
+
+[discrete]
 === Use case: Set custom command word
 
 *MSS*
@@ -2269,32 +2326,6 @@ Use case ends.
 +
 Use case ends.
 
-[discrete]
-=== Use case: Archiving of job entries
-
-*MSS*
-
-1.  User specifies the date range for archiving.
-2.  CarviciM extracts the job entries within the selected range and saves them to a new file.
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. The given date format is invalid.
-[none]
-** 1a1. CarviciM shows an error message.
-+
-Use case ends.
-
-[none]
-* 1b. The given date range is invalid.
-[none]
-** 1b1. CarviciM shows an error message.
-+
-Use case ends.
-
 _{More to be added}_
 
 [appendix]
@@ -2310,7 +2341,7 @@ _{More to be added}_
 *  Should respond to user command within 2 seconds.
 *  Should be usable by a novice who has never used an electronic job management app before.
 *  User interface should be intuitive enough for users who are not IT-savvy.
-*  View should fit the screen of any computer with minimum screen size of 1366 by 768 pixels.
+*  View should fit the screen of any computer with minimum screen size of 1280 by 720 pixels.
 
 _{More to be added}_
 
@@ -2345,23 +2376,6 @@ Pull Request
 Single Layer of Abstraction Principle: extraction of methods, fields and constants to keep details at the same level in a method.
 
 [appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -2389,12 +2403,12 @@ _{ more test cases ... }_
 
 . Deleting a employee while all employees are listed
 
-.. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
-.. Test case: `delete 1` +
+.. Prerequisites: List all employees using the `liste` command. Multiple employees in the list.
+.. Test case: `deletee 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
+.. Test case: `deletee 0` +
    Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `deletee`, `deletee x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
 _{ more test cases ... }_
