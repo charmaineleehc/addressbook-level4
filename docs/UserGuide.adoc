@@ -862,13 +862,13 @@ There is no need to save manually.
 *Q*: Can I use this application without internet connection? +
 *A*: You will be able to use most commands in CarviciM except for the `login` and `email` command.
 
-*Q*: Why can't I use my mouse?
+*Q*: Why can't I use my mouse? +
 *A*: CarviciM is targeted at users who can type fast. The commands can be executed faster than with a mouse if you are fast typer.
 
-*Q*: I want to be able to view an employee's schedule on a calendar so that I can better allocate jobs. How can I do that?
+*Q*: I want to be able to view an employee's schedule on a calendar so that I can better allocate jobs. How can I do that? +
 *A*: We hear you. We are currently working on this feature, and it will be one of the new features in CarviciM 2.0. Do watch out for the update!
 
-*Q*: The problem that I am facing is not listed here. What can I do?
+*Q*: The problem that I am facing is not listed here. What can I do? +
 *A*: Don't worry, simply drop us an email at _carvicim@gmail.com_ and we will respond to you shortly.
 
 == Command Summary

@@ -230,13 +230,13 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 
 Here is what happens when the UI makes an `execute()` call to Logic:
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
-.  This results in a `Command` object which is executed by the `LogicManager`.
+.  `Logic` uses the `CarvicimParser` class to parse the user command.
+.  This results in a `Command` object which is executed by the `LogicManager`
 .  The command execution can affect the `Model` (e.g. adding a employee) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui` (figure 6).
 
 
-For a more specific example of the steps above, given below (figure 8) is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` <<api, API>> call.
+For a more specific example of the steps above, given below (figure 8) is the Sequence Diagram for interactions within the `Logic` component for the `execute("deletee 1")` <<api, API>> call.
 
 .Interactions Inside the Logic Component for the `deletee 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
@@ -287,7 +287,7 @@ This section describes some noteworthy details on how certain features are imple
 === Add job feature
 ==== Current Implementation
 
-To implement the job management feature, new classes has been added to the `Model` component. `Job` is part of the `Model` component which is made up of `Person`, `JobNumber, `VehicleNumber`, `Status`, `Date`, `UniqueEmployeeList` and `RemarkList` as shown below.
+To implement the job management feature, new classes are added to the `Model` component. `Job` is part of the `Model` component which is made up of `Person`, `JobNumber`, `VehicleNumber`, `Status`, `Date`, `UniqueEmployeeList` and `RemarkList` as shown below.
 
 .Class Diagram of Model component
 image::ModelClassDiagram.png[width="800"]
@@ -895,6 +895,30 @@ image::SortSequenceDiagram.png[width="800"]
 ==== Current Implementation
 
 The `ArchiveCommand` is facilitated by a `AddJobCommandParser`, which is responsible for parsing the input starting `Date` and ending `Date`.
+
+`ArchiveCommandParser` code snippet that parses the starting and ending `Date`:
+[source,java]
+----
+public ArchiveCommand parse(String args) throws ParseException {
+    ArgumentMultimap argMultimap =
+            ArgumentTokenizer.tokenize(args, PREFIX_START_DATE, PREFIX_END_DATE);
+
+    if (!arePrefixesPresent(argMultimap, PREFIX_START_DATE, PREFIX_END_DATE)
+            || !argMultimap.getPreamble().isEmpty()) {
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
+    }
+
+    try {
+        Date startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_START_DATE)).get();
+        Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_END_DATE)).get();
+
+        DateRange dateRange = new DateRange(startDate, endDate);
+        return new ArchiveCommand(dateRange);
+    } catch (IllegalValueException ive) {
+        throw new ParseException(ive.getMessage(), ive);
+    }
+}
+----
 
 The `ArchiveCommand` is implemented this way to ensure that the specified starting date is earlier than the ending date:
 [source,java]
