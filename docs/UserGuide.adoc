@@ -458,6 +458,7 @@ You will see all employee entries with `john` as their name (not case-sensitive)
 `finde Betsy Tim John` +
 You will see all employee entries with `Betsy`, `Tim`, or `John` (not case-sensitive), shown in the employees list panel.
 
+// tag::findbytag[]
 === Locating employee entries by tags: `findt`
 
 To search for employee entries by tags, use this command as follows: +
@@ -481,7 +482,9 @@ You will see all employee entries with the tag `technican` (not case-sensitive),
 +
 `findt technician mechanic` +
 You will see all employee entries with the tags `technican` and/or `mechanic`(not case-sensitive), shown in the employees list panel.
+// end::findbytag[]
 
+// tag::login[]
 === Login to Gmail : `login`
 
 [NOTE]
@@ -507,7 +510,9 @@ Please do NOT click on `CANCEL`. Be assured that CarviciM will only use your acc
 ====
 
 For your convenience, your authorization information will be stored on your computer's file system, even after closing and reopening CarviciM. You will, therefore, only need to `login` once.
+// end::login[]
 
+// tag::sendemails[]
 === Email assigned employees belonging to a job : `email`
 
 [NOTE]
@@ -533,6 +538,7 @@ Example:
 
 `email j/1` +
 Auto-generated emails containing the job details of the job at index 1 of the job list panel will be sent from your Gmail account to all employees assigned to the job.
+// end::sendemails[]
 
 // tag::importexport[]
 === Importing jobs from an excel file
