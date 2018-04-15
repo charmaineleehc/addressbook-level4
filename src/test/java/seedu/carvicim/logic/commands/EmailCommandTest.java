@@ -2,11 +2,8 @@ package seedu.carvicim.logic.commands;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static seedu.carvicim.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.carvicim.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.carvicim.testutil.TypicalEmployees.getTypicalCarvicim;
-import static seedu.carvicim.testutil.TypicalEmployees.getTypicalCarvicimWithAssignedJobs;
 import static seedu.carvicim.testutil.TypicalEmployees.getTypicalCarvicimWithJobs;
 
 import org.junit.Before;
@@ -15,13 +12,10 @@ import org.junit.Test;
 import seedu.carvicim.commons.core.Messages;
 import seedu.carvicim.logic.CommandHistory;
 import seedu.carvicim.logic.UndoRedoStack;
-import seedu.carvicim.logic.commands.exceptions.CommandException;
 import seedu.carvicim.model.Model;
 import seedu.carvicim.model.ModelManager;
 import seedu.carvicim.model.UserPrefs;
-import seedu.carvicim.model.job.Job;
 import seedu.carvicim.model.job.JobNumber;
-import seedu.carvicim.testutil.JobBuilder;
 
 public class EmailCommandTest {
 
