@@ -326,8 +326,15 @@ Example:
 
 `adde n/John Doe p/98765432 e/johnd@example.com` +
 The command will add the details of the new employee into CarviciM. +
-You will see "New employee added: ..." followed by details of the new employee. +
-You will see the newly added details of the employee in the employee list panel.
+You will see "New employee added: ..." followed by details of the new employee (shown in the image below). +
+
+image::AddEmployeeResult1.PNG[width="500"]
+_Figure 5.12.1 : Result display showing the details of the new employee_
+
+You will see the newly added details of the employee in the employee list panel (shown in the image below).
+
+image::AddEmployeeResult2.PNG[width="300"]
+_Figure 5.12.1 : Employee list panel showing the details of the new employee_
 
 === Listing all employee entries : `liste`
 
@@ -351,18 +358,32 @@ Examples:
 * Example 1: +
 +
 `liste` +
-You will see a list of employee entries displayed in the employee list panel. +
+You will see a list of employee entries displayed in the employee list panel (shown in the image below). +
++
+image::DeleteEmployeeResult1.PNG[width="300"]
+_Figure 5.14.1 : Employee list panel displaying the details of all employees_
+
 +
 `deletee 2` +
-You will see an updated employee list panel which has the 2nd employee entry removed.
+You will see an updated employee list panel which has the 2nd employee entry removed (shown in the image below).
++
+image::DeleteEmployeeResult2.PNG[width="850"]
+_Figure 5.14.2 : Employee list panel displaying the updated list of employees_
 
 * Example 2: +
 +
-`finde Betsy` +
-You will see the results of the `finde` command which shows all employee entries with matching keyword name, in the employee list panel. +
+`finde david` +
+You will see the results of the `finde` command which shows all employee entries with matching keyword name, in the employee list panel (shown in the image below). +
++
+image::DeleteEmployeeResult3.PNG[width="300"]
+_Figure 5.14.3 : Employee list panel displaying the matching list of employees_
+
 +
 `deletee 1` +
-You will see an updated employee list panel which has the 1st employee entry removed.
+You will see an updated employee list panel which has the 1st employee entry removed (shown in the image below).
++
+image::DeleteEmployeeResult4.PNG[width="850"]
+_Figure 5.14.4 : Employee list panel displaying the updated matching list of employees_
 
 // tag::sort[]
 === Sorting all employee entries : `sort`
@@ -377,7 +398,7 @@ Given a unsorted list of employees (shown in the image below).
 image::SortResult1.PNG[width="300"]
 _Figure 5.15.1 : Employee List Panel showing a list of unsorted employee entries_
 
-You will see the sorted list of employee after the execution of `sort` command (shown in the image below).
+You will see the sorted list of employees after the execution of `sort` command (shown in the image below).
 
 image::SortResult2.PNG[width="850"]
 _Figure 5.15.2 : Employee List Panel showing a list of sorted employee entries_
@@ -917,4 +938,3 @@ This section contains a summary of all the commands that you can use in CarviciM
 |*Exit The Application* |`exit` |
 
 |=======================================================================
-
